@@ -28,6 +28,8 @@ A simple Streamlit app template for you to modify!
 - 💼 LinkedIn: Ramlan Marbun (https://www.linkedin.com/in/ramlan-marbun-368168146/)
 - 📸 Instagram: Ramlan Marbun (https://www.instagram.com/ramlanmarbunlg/)
 
-☕ Support  If you appreciate the project and wish to encourage its continued development, consider supporting my work. ko-fi
+☕ Support
+  If you appreciate the project and wish to encourage its continued development, consider supporting my work. ko-fi
 
-Feedback & Collaboration  For feedback, suggestions, or potential collaboration opportunities, reach out at ramlanmediakreatif@gmail.com
+Feedback & Collaboration
+  For feedback, suggestions, or potential collaboration opportunities, reach out at ramlanmediakreatif@gmail.com

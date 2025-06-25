@@ -29,7 +29,7 @@ A simple Streamlit app template for you to modify!
 - 📸 Instagram: Ramlan Marbun (https://www.instagram.com/ramlanmarbunlg/)
 
 ☕ Support
-If you appreciate the project and wish to encourage its continued development, consider supporting my work. ko-fi
+   If you appreciate the project and wish to encourage its continued development, consider supporting my work. ko-fi
 
 Feedback & Collaboration
-For feedback, suggestions, or potential collaboration opportunities, reach out at contact@pythonandvba.com.
+   For feedback, suggestions, or potential collaboration opportunities, reach out at ramlanmediakreatif@gmail.com

@@ -17,7 +17,7 @@ A simple Streamlit app template for you to modify!
    ```
    $ streamlit run streamlit_app.py
    ```
-3. ✅ **Fitur**
+3. ✅ **Fitur Versi 1**
 - Sidebar interaktif untuk navigasi jenis bangun dan operasi.
 - Input dinamis berdasarkan bentuk dan jenis operasi (luas / keliling).
 - Perhitungan otomatis dan hasil langsung ditampilkan.

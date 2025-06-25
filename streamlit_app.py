@@ -48,7 +48,7 @@ st.sidebar.title("📐 Pilih Bangun Datar")
 bangun = st.sidebar.selectbox("🔷 Bangun Datar", list(gambar_dict.keys()))
 
 # Tampilkan Gambar
-st.image(Image.open(gambar_dict[bangun]), caption=f"Gambar {bangun}", width=300)
+st.image(Image.open(gambar_dict[bangun]), caption=f"Gambar {bangun}", width=150)
 
 # Multi-tab
 tab1, tab2 = st.tabs(["📏 Luas", "📏 Keliling"])

@@ -23,11 +23,11 @@ A simple Streamlit app template for you to modify!
 - Perhitungan otomatis dan hasil langsung ditampilkan.
 
 🤝 Connect with Me
-📺 YouTube: CodingIsFun
-🌐 Website: PythonAndVBA
-💬 Discord: Join the Community
-💼 LinkedIn: Sven Bosau
-📸 Instagram: sven_bosau
+📺 YouTube: Ramlan Marbun (https://www.youtube.com/@RamlanMarbun)
+🌐 Website: Ramlan Marbun (https://www.ramlanmarbun.my.id/)
+💼 LinkedIn: Ramlan Marbun (https://www.linkedin.com/in/ramlan-marbun-368168146/)
+📸 Instagram: Ramlan Marbun (https://www.instagram.com/ramlanmarbunlg/)
+
 ☕ Support
 If you appreciate the project and wish to encourage its continued development, consider supporting my work. ko-fi
 

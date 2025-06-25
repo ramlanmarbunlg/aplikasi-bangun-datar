@@ -47,9 +47,6 @@ def keliling_layang_layang(a, b): return 2 * (a + b)
 st.sidebar.title("📐 Pilih Bangun Datar")
 bangun = st.sidebar.selectbox("🔷 Bangun Datar", list(gambar_dict.keys()))
 
-# Tampilkan Gambar
-st.image(Image.open(gambar_dict[bangun]), caption=f"Gambar {bangun}", width=150)
-
 # Multi-tab
 tab1, tab2 = st.tabs(["📏 Luas", "📏 Keliling"])
 
@@ -123,6 +120,9 @@ with tab2:
         a = st.number_input("Sisi A", min_value=0.0, key="a_ll_kel")
         b = st.number_input("Sisi B", min_value=0.0, key="b_ll_kel")
         st.success(f"Keliling: {keliling_layang_layang(a, b)}")
+        
+# Tampilkan Gambar
+st.image(Image.open(gambar_dict[bangun]), caption=f"Gambar {bangun}", width=150)
 
 # Footer
 st.markdown("---")

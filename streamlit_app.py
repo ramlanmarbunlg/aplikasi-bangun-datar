@@ -15,14 +15,8 @@ if mode_anak:
 
 # Gambar per bangun datar
 gambar_dict = {
-    "Persegi": "images/persegi.png",
-    "Persegi Panjang": "images/persegi_panjang.gif",
-    "Segitiga": "images/segitiga.png",
-    "Lingkaran": "images/lingkaran.png",
-    "Jajar Genjang": "images/jajar_genjang.png",
-    "Trapesium": "images/trapesium.png",
-    "Belah Ketupat": "images/belah_ketupat.png",
-    "Layang-Layang": "images/layang_layang.png"
+    "Persegi": "images/persegi.gif",
+    "Persegi Panjang": "images/persegi_panjang.gif"
 }
 
 # Fungsi Matematika

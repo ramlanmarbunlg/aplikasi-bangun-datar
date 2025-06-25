@@ -16,8 +16,8 @@ if mode_anak:
 # Gambar tiap bangun
 gambar_dict = {
     "Persegi": "images/persegi.png",
-    "Persegi Panjang": "images/persegi_panjang1.svg",
-    "Persegi Panjang": "images/persegi_panjang2.png",
+    "Persegi Panjang1": "images/persegi_panjang1.svg",
+    "Persegi Panjang2": "images/persegi_panjang2.png",
     "Segitiga": "images/segitiga.png",
     "Lingkaran": "images/lingkaran.png",
     "Jajar Genjang": "images/jajar_genjang.png",

@@ -13,6 +13,13 @@ if mode_anak:
     st.balloons()
     st.audio("audio/yay.mp3", format="audio/mp3")
 
+# Gambar per bangun datar
+gambar_dict = {
+    
+    "Persegi": "images/persegi.gif",
+    "Persegi Panjang": "images/persegi_panjang.gif"
+}
+
 def load_lottieurl(url):
     r = requests.get(url)
     if r.status_code != 200:
@@ -21,12 +28,6 @@ def load_lottieurl(url):
 # ---- LOAD ASSETS ----
 lottie_coding = load_lottieurl ("https://lottie.host/3c856ae3-786f-4b1b-887c-3cd805d6d274/X5jybCphGO.json")
 
-# Gambar per bangun datar
-gambar_dict = {
-    
-    "Persegi": "images/persegi.gif",
-    "Persegi Panjang": "images/persegi_panjang.gif"
-}
 
 # Fungsi Matematika
 def luas_persegi(s): return s**2

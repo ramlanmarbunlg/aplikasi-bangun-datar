@@ -16,7 +16,7 @@ if mode_anak:
 # Gambar per bangun datar
 gambar_dict = {
     
-    "Persegi": "images/persegi.gif",
+    "Persegi": "images/persegi.png",
     "Persegi Panjang": "images/persegi_panjang.gif"
 }
 

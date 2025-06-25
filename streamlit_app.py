@@ -20,15 +20,6 @@ gambar_dict = {
     "Persegi Panjang": "images/persegi_panjang.gif"
 }
 
-def load_lottieurl(url):
-    r = requests.get(url)
-    if r.status_code != 200:
-        return None
-    return r.json()
-# ---- LOAD ASSETS ----
-lottie_coding = load_lottieurl ("https://lottie.host/3c856ae3-786f-4b1b-887c-3cd805d6d274/X5jybCphGO.json")
-
-
 # Fungsi Matematika
 def luas_persegi(s): return s**2
 def keliling_persegi(s): return 4 * s

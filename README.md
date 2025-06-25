@@ -22,16 +22,17 @@ A simple Streamlit app template for you to modify!
 - Input dinamis berdasarkan bentuk dan jenis operasi (luas / keliling).
 - Perhitungan otomatis dan hasil langsung ditampilkan.
 
-🤝 <u>**Connect with Me**</u>
+🤝 **Connect with Me**
+---
 - 📺 YouTube: Ramlan Marbun (https://www.youtube.com/@RamlanMarbun)
 - 🌐 Website: Ramlan Marbun (https://www.ramlanmarbun.my.id/)
 - 💼 LinkedIn: Ramlan Marbun (https://www.linkedin.com/in/ramlan-marbun-368168146/)
 - 📸 Instagram: Ramlan Marbun (https://www.instagram.com/ramlanmarbunlg/)
 
-☕ **<u>Support</u>**
-
+☕ **Support**
+---
 If you appreciate the project and wish to encourage its continued development, consider supporting my work. ko-fi
 
-**<u>Feedback & Collaboration**</u>
-
+**Feedback & Collaboration**
+---
 For feedback, suggestions, or potential collaboration opportunities, reach out at ramlanmediakreatif@gmail.com

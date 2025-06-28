@@ -8,7 +8,7 @@ import json
 import os
 
 # Konfigurasi halaman
-st.set_page_config(page_title="🎲 Bangun Datar Anak xxx", layout="centered")
+st.set_page_config(page_title="🎲 Bangun Datar Anak", layout="centered")
 
 # Tema warna ceria dinamis
 warna_ceria = [
@@ -146,10 +146,10 @@ if st.session_state.mode_quiz:
 
         # Timer dan countdown
         elapsed = int(time.time() - st.session_state.start_time)
-        sisa_waktu = max(0, 15 - elapsed)
+        sisa_waktu = max(0, 20 - elapsed)
 
         # Warna dinamis berdasarkan sisa waktu
-        warna = "lightgreen" if sisa_waktu > 10 else "orange" if sisa_waktu > 5 else "red"
+        warna = "lightgreen" if sisa_waktu > 15 else "orange" if sisa_waktu > 5 else "red"
 
         # Countdown horizontal minimalis di kanan atas
         countdown_html = f"""

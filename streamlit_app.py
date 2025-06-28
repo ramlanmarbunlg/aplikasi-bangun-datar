@@ -35,6 +35,10 @@ if "quiz_jawaban" not in st.session_state:
     st.session_state.quiz_jawaban = {}
 if "start_time" not in st.session_state:
     st.session_state.start_time = time.time()
+if "kategori_quiz" not in st.session_state:
+    st.session_state.kategori_quiz = None
+if "high_score" not in st.session_state:
+    st.session_state.high_score = {}
 
 # Jika sedang di halaman loading
 if st.session_state.loading_page:
@@ -42,7 +46,7 @@ if st.session_state.loading_page:
     progress_bar = st.progress(0)
     percent_text = st.empty()
     for i in range(101):
-        time.sleep(0.05)
+        time.sleep(0.01)
         progress_bar.progress(i)
         percent_text.markdown(f"<h5 style='text-align:center;'>{i} %</h5>", unsafe_allow_html=True)
     st.session_state.loading_page = False
@@ -75,11 +79,6 @@ if st.session_state.mode_anak:
         </style>
     """, unsafe_allow_html=True)
     st.balloons()
-    st.markdown("""
-        <audio autoplay>
-            <source src="audio/yay.mp3" type="audio/mp3">
-        </audio>
-    """, unsafe_allow_html=True)
 
 # Sidebar
 if st.sidebar.button("🔙 Halaman Awal"):
@@ -91,26 +90,38 @@ if st.sidebar.button("🎯 Mode Quiz"):
     st.session_state.mode_quiz = True
     st.session_state.quiz_index = 0
     st.session_state.quiz_jawaban = {}
+    st.session_state.kategori_quiz = None
     st.session_state.start_time = time.time()
     st.rerun()
 
 st.sidebar.markdown("<h4 style='margin-bottom:10px;'>📐 Pilih Bangun Datar</h4>", unsafe_allow_html=True)
 
-# MODE QUIZ
+# =============== MODE QUIZ ==================
 if st.session_state.mode_quiz:
-    st.header("🎓 Quiz Bangun Datar - Soal ke-" + str(st.session_state.quiz_index + 1))
+    if not st.session_state.kategori_quiz:
+        kategori = st.selectbox("Pilih kategori quiz:", [
+            "Persegi", "Persegi Panjang", "Segitiga", "Lingkaran",
+            "Jajar Genjang", "Trapesium", "Belah Ketupat", "Layang-Layang"])
+        if st.button("Mulai Quiz"):
+            st.session_state.kategori_quiz = kategori
+            st.session_state.start_time = time.time()
+            st.rerun()
+        st.stop()
 
     # Load soal dari file JSON
     with open("soal_quiz.json") as f:
-        soal_data = json.load(f)
+        all_soal = json.load(f)
 
+    soal_data = [s for s in all_soal if s["kategori"] == st.session_state.kategori_quiz]
     total_soal = len(soal_data)
     indeks = st.session_state.quiz_index
 
+    st.header(f"🎓 Quiz: {st.session_state.kategori_quiz} - Soal {indeks + 1} dari {total_soal}")
+
     if indeks < total_soal:
         soal = soal_data[indeks]
-        st.subheader(soal["soal"])
-        jawaban = st.radio("Pilih jawaban:", soal["opsi"], key=f"soal{indeks}")
+        st.markdown(f"**{soal['soal']}**")
+        jawaban = st.radio("Pilih jawaban:", soal["opsi"], key=f"soal_{indeks}")
 
         elapsed = int(time.time() - st.session_state.start_time)
         sisa_waktu = max(0, 15 - elapsed)
@@ -130,7 +141,7 @@ if st.session_state.mode_quiz:
 
         st.stop()
 
-    # Tampilkan skor dan pembahasan
+    # Tampilkan hasil akhir
     st.subheader("📊 Hasil Evaluasi")
     skor = 0
     for i, soal in enumerate(soal_data):
@@ -141,17 +152,29 @@ if st.session_state.mode_quiz:
         if benar:
             skor += 1
         st.markdown(f"**Soal {i+1}: {ikon}**")
-        st.markdown(f"{soal['soal']}")
-        st.markdown(f"**Jawabanmu:** {user_jawaban}  ")
+        st.markdown(soal["soal"])
+        st.markdown(f"**Jawabanmu:** {user_jawaban}")
         st.markdown(f"<span style='color:{warna};'>**Jawaban benar:** {soal['jawaban']}</span>", unsafe_allow_html=True)
         st.markdown(f"📝 *Pembahasan:* {soal['pembahasan']}")
         st.markdown("---")
 
     st.success(f"🎉 Skor kamu: {skor} dari {total_soal}")
 
+    # Cek dan simpan skor tertinggi per kategori
+    kategori = st.session_state.kategori_quiz
+    if kategori not in st.session_state.high_score or skor > st.session_state.high_score[kategori]:
+        st.session_state.high_score[kategori] = skor
+        st.balloons()
+        st.success("🌟 Selamat! Skor tertinggi baru!")
+
+    # Tampilkan skor tertinggi semua kategori
+    st.markdown("### 🏆 Skor Tertinggi Tiap Kategori")
+    for k, v in st.session_state.high_score.items():
+        st.markdown(f"- **{k}**: {v} poin")
+
     if st.button("🔁 Ulangi Quiz"):
         for key in list(st.session_state.keys()):
-            if key.startswith("soal") or key.startswith("quiz"):
+            if key.startswith("soal") or key.startswith("quiz") or key == "kategori_quiz":
                 del st.session_state[key]
         st.session_state.mode_quiz = True
         st.session_state.quiz_index = 0
@@ -161,7 +184,7 @@ if st.session_state.mode_quiz:
 
     st.stop()
 
-# ========= KALKULASI BANGUN DATAR =========
+# ============= MODE KALKULASI BANGUN DATAR=============
 # Gambar ilustrasi tiap bangun
 gambar_dict = {
     "Persegi": "images/persegi.png",

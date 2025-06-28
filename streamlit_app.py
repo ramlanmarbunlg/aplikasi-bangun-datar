@@ -123,6 +123,8 @@ with tab2:
         
 # Tampilkan Gambar
 st.image(Image.open(gambar_dict[bangun]), caption=f"Gambar {bangun}", width=150)
+# Tampilkan Materi Bacaan
+st.text ("Materi: https://id.wikipedia.org/wiki/Segitiga")
 
 # Footer
 st.markdown("---")

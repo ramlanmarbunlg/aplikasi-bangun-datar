@@ -14,7 +14,7 @@ if mode_anak:
     st.markdown(
         """
         <audio autoplay>
-            <source src="audio/yay.mp3" type="audio/mpeg">
+            <source src="audio/yay.mp3" type="audio/mp3">
         </audio>
         """,
         unsafe_allow_html=True

@@ -35,7 +35,7 @@ if "quiz_index" not in st.session_state:
 if "quiz_jawaban" not in st.session_state:
     st.session_state.quiz_jawaban = {}
 if "start_time" not in st.session_state:
-    st.session_state.start_time = time.time()
+    st.session_state.start_time = time.time()      
 if "quiz_kategori" not in st.session_state:
     st.session_state.quiz_kategori = None
 if "high_score" not in st.session_state:
@@ -145,17 +145,13 @@ if st.session_state.mode_quiz:
 
     st.subheader(soal["soal"])
 
-    # Inisialisasi waktu awal jika belum
-    if "start_time" not in st.session_state:
-        st.session_state.start_time = time.time()
-
     # Hitung waktu tersisa
     elapsed = int(time.time() - st.session_state.start_time)
     sisa_waktu = max(0, 15 - elapsed)
 
-    # Tentukan warna countdown bar
+    # Warna dinamis countdown bar
     if sisa_waktu > 10:
-        warna = "green"
+        warna = "lightgreen"
     elif sisa_waktu > 5:
         warna = "orange"
     else:
@@ -165,8 +161,9 @@ if st.session_state.mode_quiz:
     countdown_placeholder = st.empty()
     countdown_placeholder.markdown(
         f"""
-        <div style="height: 20px; background-color: #eee; border-radius: 10px; overflow: hidden;">
-            <div style="width: {(sisa_waktu / 15) * 100}%; background-color: {warna}; height: 100%; text-align: center; color: white; font-weight: bold;">
+        <div style="height: 18px; background-color: #eee; border-radius: 10px; overflow: hidden;">
+            <div style="width: {(sisa_waktu / 15) * 100}%; background-color: {warna}; height: 100%; 
+                        text-align: center; color: white; font-size: 14px; font-weight: bold;">
                 ⏳ {sisa_waktu} detik
             </div>
         </div>
@@ -174,23 +171,28 @@ if st.session_state.mode_quiz:
         unsafe_allow_html=True
     )
 
-    # Matikan input saat waktu habis
+    # Jika waktu habis, otomatis lanjut
     jawaban_disabled = sisa_waktu == 0
     jawaban = st.radio("Pilih jawaban:", soal["opsi"], key=f"soal{indeks}", disabled=jawaban_disabled)
 
     if sisa_waktu == 0:
         st.warning("⏰ Waktu habis!")
+        # Simpan jawaban yang dipilih atau kosong jika tidak memilih
         st.session_state.quiz_jawaban[indeks] = st.session_state.get(f"soal{indeks}", "(Lewat)")
         st.session_state.quiz_index += 1
         st.session_state.start_time = time.time()
         st.rerun()
 
-    # Tombol jawab
+    # Tombol untuk menjawab manual sebelum waktu habis
     if st.button("✅ Jawab dan Lanjut") and not jawaban_disabled:
         st.session_state.quiz_jawaban[indeks] = jawaban
         st.session_state.quiz_index += 1
         st.session_state.start_time = time.time()
         st.rerun()
+
+    # Paksa update halaman tiap detik agar countdown hidup
+    time.sleep(1)
+    st.rerun()
 
     st.stop()
         

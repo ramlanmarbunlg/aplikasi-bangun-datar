@@ -138,7 +138,7 @@ if st.session_state.mode_quiz:
         st.progress((indeks + 1) / total_soal)
 
         # === Timer countdown 20 detik ===
-        MAX_WAKTU = 15
+        MAX_WAKTU = 20
         elapsed = int(time.time() - st.session_state.start_time)
         sisa_waktu = max(0, MAX_WAKTU - elapsed)
 

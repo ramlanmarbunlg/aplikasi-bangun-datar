@@ -189,14 +189,6 @@ if st.session_state.mode_quiz:
         st.session_state.quiz_jawaban = {}
         st.session_state.start_time = time.time()
         st.rerun()
-
-    # ✅ Tombol untuk kembali ke mode kalkulasi
-    if st.button("📐 Kembali ke Mode Kalkulasi"):
-        st.session_state.mode_quiz = False
-        st.session_state.quiz_index = 0
-        st.session_state.quiz_jawaban = {}
-        st.session_state.start_time = time.time()
-        st.rerun()
     
         st.stop()
 

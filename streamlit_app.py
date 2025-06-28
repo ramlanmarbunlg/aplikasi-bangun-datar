@@ -58,7 +58,7 @@ if mode_anak:
     st.markdown(
         """
         <audio autoplay>
-            <source src="audio/yay.mp3" type="audio/mp3">
+            <source src="audio/yay.mp3" type="audio/mpeg">
         </audio>
         """,
         unsafe_allow_html=True
@@ -66,7 +66,7 @@ if mode_anak:
 
 # Tombol kembali ke halaman awal
 st.sidebar.markdown("---")
-if st.sidebar.button("🔙 Kembali ke Halaman Awal"):
+if st.sidebar.button("🔙 Home"):
     st.session_state.mulai_main = False
     st.rerun()
 

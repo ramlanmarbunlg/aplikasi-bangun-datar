@@ -171,7 +171,7 @@ if st.session_state.mode_quiz:
         ))
     
         # Tampilkan countdown animasi lingkaran
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, use_container_width=False)
     
         # Radio pilihan jawaban (disable jika waktu habis)
         jawaban = st.radio("Pilih jawaban:", soal["opsi"],

@@ -169,14 +169,14 @@ if st.session_state.mode_quiz:
                 ],
             }
         ))
-        # ✅ Atur ukuran grafik agar tidak terlalu besar
-    fig.update_layout(
-        height=300,  # ganti sesuai keinginan (default biasanya 450–600)
-        width=500,
-        margin=dict(t=30, b=10, l=10, r=10)
-    )
-
-    st.plotly_chart(fig)
+            # ✅ Atur ukuran grafik agar tidak terlalu besar
+        fig.update_layout(
+            height=300,  # ganti sesuai keinginan (default biasanya 450–600)
+            width=500,
+            margin=dict(t=30, b=10, l=10, r=10)
+        )
+    
+        st.plotly_chart(fig)
     
         # Tampilkan countdown animasi lingkaran
         st.plotly_chart(fig, use_container_width=True)

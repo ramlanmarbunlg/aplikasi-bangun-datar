@@ -31,7 +31,7 @@ if not st.session_state.mulai_main:
 
     if st.button("👉 Klik untuk Mulai Bermain 🎲", type="primary"):
         with st.spinner("🎮 Memuat permainan seru..."):
-            st.image("images/loading_emoji.gif", width=150, caption="🎉 Yuk kita mulai!")
+            st.image("images/loading_emoji.gif", width=300, caption="🎉 Yuk kita mulai!")
             time.sleep(5)
         st.session_state.mulai_main = True
         st.session_state.mode_anak = True
@@ -101,7 +101,7 @@ def luas_layang_layang(d1, d2): return 0.5 * d1 * d2
 def keliling_layang_layang(a, b): return 2 * (a + b)
 
 # Sidebar bangun
-st.sidebar.markdown("<h4 style='margin-bottom:10px;'>📐 Pilih Bangun Datar</h4>", unsafe_allow_html=True)
+st.sidebar.markdown("<h6 style='margin-bottom:10px;'>📐 Pilih Bangun Datar</h6>", unsafe_allow_html=True)
 bangun = st.sidebar.selectbox("🔷 Bangun Datar", list(gambar_dict.keys()))
 
 # Tab luas dan keliling

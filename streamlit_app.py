@@ -121,10 +121,24 @@ with tab2:
         b = st.number_input("Sisi B", min_value=0.0, key="b_ll_kel")
         st.success(f"Keliling: {keliling_layang_layang(a, b)}")
         
-# Tampilkan Gambar
-st.image(Image.open(gambar_dict[bangun]), caption=f"Gambar {bangun}", width=150)
-# Tampilkan Materi Bacaan
-st.text ("Materi: https://id.wikipedia.org/wiki/Segitiga")
+# Setelah menampilkan gambar
+img = Image.open(gambar_dict[bangun])
+img_resized = img.resize((150, 150))
+st.image(img_resized, caption=f"Gambar {bangun}")
+
+# Link materi bacaan
+link_dict = {
+    "Persegi": "https://example.com/materi/persegi",
+    "Persegi Panjang": "https://example.com/materi/persegi-panjang",
+    "Segitiga": "https://example.com/materi/segitiga",
+    "Lingkaran": "https://example.com/materi/lingkaran",
+    "Jajar Genjang": "https://example.com/materi/jajar-genjang",
+    "Trapesium": "https://example.com/materi/trapesium",
+    "Belah Ketupat": "https://example.com/materi/belah-ketupat",
+    "Layang-Layang": "https://example.com/materi/layang-layang"
+}
+
+st.markdown(f"📚 [Baca materi lengkap tentang {bangun}]({link_dict[bangun]})")
 
 # Footer
 st.markdown("---")

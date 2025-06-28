@@ -33,6 +33,14 @@ A simple Streamlit app template for you to modify!
 - 📚 Link materi bacaan di bawah gambar
 - 🎨 Tema warna ceria acak
 - 🌀 Animasi loading gif berjalan sempurna
+
+5. ✅ **Fitur Versi 3 (streamlit-appv.py)**
+- 🎉 Penambahan Fitur QUIZ/EVALUASI, PEMBAHASAN
+- 📌 Tombol Mode Evaluasi di sidebar
+- ❓ Quiz interaktif dengan 5 soal pilihan ganda acak
+- 📝 Skor akhir dan pesan semangat
+- ✅ Mode ulangi quiz
+- 🌈 Otomatis pakai gaya anak-anak (warna + emoji)
   
 🤝 **Connect with Me**
 ---

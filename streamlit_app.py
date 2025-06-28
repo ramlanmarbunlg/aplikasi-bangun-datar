@@ -3,11 +3,13 @@ import math
 from PIL import Image
 import time
 import random
+import json
+import os
 
 # Konfigurasi halaman
 st.set_page_config(page_title="🎲 Bangun Datar Anak", layout="centered")
 
-# Warna latar & teks ceria
+# Tema warna ceria dinamis
 warna_ceria = [
     {"bg": "#FFF8DC", "text": "#333333"},
     {"bg": "#FFFAF0", "text": "#FF1493"},
@@ -25,18 +27,24 @@ if "mode_anak" not in st.session_state:
     st.session_state.mode_anak = False
 if "tema_anak" not in st.session_state:
     st.session_state.tema_anak = random.choice(warna_ceria)
+if "mode_quiz" not in st.session_state:
+    st.session_state.mode_quiz = False
+if "quiz_index" not in st.session_state:
+    st.session_state.quiz_index = 0
+if "quiz_jawaban" not in st.session_state:
+    st.session_state.quiz_jawaban = {}
+if "start_time" not in st.session_state:
+    st.session_state.start_time = time.time()
 
-# Jika sedang di halaman loading (untuk animasi berjalan)
+# Jika sedang di halaman loading
 if st.session_state.loading_page:
     st.markdown("<h4 style='text-align:center;'>⏳ Memuat permainan seru untukmu...</h4>", unsafe_allow_html=True)
     progress_bar = st.progress(0)
     percent_text = st.empty()
-
     for i in range(101):
-        time.sleep(0.05)  # ~5 detik
+        time.sleep(0.05)
         progress_bar.progress(i)
         percent_text.markdown(f"<h5 style='text-align:center;'>{i} %</h5>", unsafe_allow_html=True)
-
     st.session_state.loading_page = False
     st.session_state.mulai_main = True
     st.session_state.mode_anak = True
@@ -54,12 +62,9 @@ if not st.session_state.mulai_main:
 
     st.stop()
 
-# --------- MAIN APLIKASI ---------
-mode_anak = st.session_state.get("mode_anak", False)
-
-# Tema anak aktif
-if mode_anak:
-    tema = st.session_state.get("tema_anak", {"bg": "#FFF8DC", "text": "#333"})
+# Mode anak-anak aktif
+if st.session_state.mode_anak:
+    tema = st.session_state.tema_anak
     st.markdown(f"""
         <style>
         body {{
@@ -68,22 +73,13 @@ if mode_anak:
             font-size: 18px;
         }}
         </style>
-        """, unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
     st.balloons()
-    st.markdown(
-        """
+    st.markdown("""
         <audio autoplay>
             <source src="audio/yay.mp3" type="audio/mp3">
         </audio>
-        """,
-        unsafe_allow_html=True
-    )
-
-# Tombol kembali ke halaman awal
-st.sidebar.markdown("---")
-if st.sidebar.button("🔙 Home"):
-    st.session_state.mulai_main = False
-    st.rerun()
+    """, unsafe_allow_html=True)
 
 # Gambar bangun datar
 gambar_dict = {
@@ -118,6 +114,82 @@ def keliling_layang_layang(a, b): return 2 * (a + b)
 # Sidebar bangun
 st.sidebar.markdown("<h3 style='margin-bottom:10px;'>📐 Pilih Bangun Datar</h3>", unsafe_allow_html=True)
 bangun = st.sidebar.selectbox("🔷 Bangun Datar", list(gambar_dict.keys()))
+
+if st.sidebar.button("🎯 Mode Quiz"):
+    st.session_state.mode_quiz = True
+    st.session_state.quiz_index = 0
+    st.session_state.quiz_jawaban = {}
+    st.session_state.start_time = time.time()
+    st.rerun()
+
+if st.sidebar.button("🔙 Halaman Awal"):
+    st.session_state.mulai_main = False
+    st.session_state.mode_quiz = False
+    st.rerun()
+
+if st.session_state.mode_quiz:
+    st.header("🎓 Quiz Bangun Datar - Soal ke-" + str(st.session_state.quiz_index + 1))
+
+    # Load soal dari file JSON
+    with open("soal_quiz.json") as f:
+        soal_data = json.load(f)
+
+    total_soal = len(soal_data)
+    indeks = st.session_state.quiz_index
+
+    if indeks < total_soal:
+        soal = soal_data[indeks]
+        st.subheader(soal["soal"])
+        jawaban = st.radio("Pilih jawaban:", soal["opsi"], key=f"soal{indeks}")
+
+        elapsed = int(time.time() - st.session_state.start_time)
+        sisa_waktu = max(0, 15 - elapsed)
+        st.info(f"⏳ Sisa waktu: {sisa_waktu} detik")
+
+        if sisa_waktu == 0:
+            st.session_state.quiz_jawaban[indeks] = jawaban
+            st.session_state.quiz_index += 1
+            st.session_state.start_time = time.time()
+            st.experimental_rerun()
+
+        if st.button("✅ Jawab dan Lanjut"):
+            st.session_state.quiz_jawaban[indeks] = jawaban
+            st.session_state.quiz_index += 1
+            st.session_state.start_time = time.time()
+            st.experimental_rerun()
+
+        st.stop()
+
+    # Tampilkan skor dan pembahasan
+    st.subheader("📊 Hasil Evaluasi")
+    skor = 0
+    for i, soal in enumerate(soal_data):
+        user_jawaban = st.session_state.quiz_jawaban.get(i, "(Belum Dijawab)")
+        benar = user_jawaban == soal["jawaban"]
+        ikon = "✅" if benar else "❌"
+        warna = "green" if benar else "red"
+        if benar:
+            skor += 1
+        st.markdown(f"**Soal {i+1}: {ikon}**")
+        st.markdown(f"{soal['soal']}")
+        st.markdown(f"**Jawabanmu:** {user_jawaban}  ")
+        st.markdown(f"<span style='color:{warna};'>**Jawaban benar:** {soal['jawaban']}</span>", unsafe_allow_html=True)
+        st.markdown(f"📝 *Pembahasan:* {soal['pembahasan']}")
+        st.markdown("---")
+
+    st.success(f"🎉 Skor kamu: {skor} dari {total_soal}")
+
+    if st.button("🔁 Ulangi Quiz"):
+        for key in list(st.session_state.keys()):
+            if key.startswith("soal") or key.startswith("quiz"):
+                del st.session_state[key]
+        st.session_state.mode_quiz = True
+        st.session_state.quiz_index = 0
+        st.session_state.quiz_jawaban = {}
+        st.session_state.start_time = time.time()
+        st.rerun()
+
+    st.stop()
 
 # Tab luas dan keliling
 tab1, tab2 = st.tabs(["📏 Luas", "🔷 Keliling"])

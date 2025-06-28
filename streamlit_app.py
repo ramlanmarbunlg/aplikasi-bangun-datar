@@ -136,8 +136,8 @@ if st.session_state.mode_quiz:
 
    # Soal masih ada
     if indeks < total_soal:
-    soal = soal_data[indeks]
-    st.header(f"🎓 Quiz: {soal['kategori']} - Soal {indeks + 1} dari {total_soal}")
+        soal = soal_data[indeks]
+        st.header(f"🎓 Quiz: {soal['kategori']} - Soal {indeks + 1} dari {total_soal}")
 
     # Progress bar visual soal
     progress = (indeks + 1) / total_soal

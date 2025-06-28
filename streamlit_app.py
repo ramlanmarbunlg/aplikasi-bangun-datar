@@ -134,23 +134,28 @@ if st.session_state.mode_quiz:
     total_soal = len(soal_data)
     indeks = st.session_state.quiz_index
 
-    # Jika soal masih tersedia
-    if indeks < total_soal:
-        soal = soal_data[indeks]
-        st.header(f"🎓 Quiz: {soal['kategori']} - Soal {indeks + 1} dari {total_soal}")
+    # Cegah pembagian nol
+    if total_soal == 0:
+        st.error("❌ Tidak ada soal untuk kategori ini.")
+        st.stop()
 
-    # Progress bar
-    progress = min((indeks + 1) / total_soal, 1.0)
-    st.progress(progress)
+# Progress bar aman
+progress = min((indeks + 1) / total_soal, 1.0)
+st.progress(progress)
 
+# ✅ Jika masih ada soal yang harus dijawab
+if indeks < total_soal:
+    soal = soal_data[indeks]
+    st.header(f"🎓 Quiz: {soal['kategori']} - Soal {indeks + 1} dari {total_soal}")
     st.subheader(soal["soal"])
 
-    # Timer dan countdown
+    # Timer
     if "start_time" not in st.session_state:
         st.session_state.start_time = time.time()
     elapsed = int(time.time() - st.session_state.start_time)
     sisa_waktu = max(0, 15 - elapsed)
 
+    # Countdown bar
     warna = "lightgreen" if sisa_waktu > 10 else "orange" if sisa_waktu > 5 else "red"
     countdown_placeholder = st.empty()
     countdown_placeholder.markdown(
@@ -185,28 +190,26 @@ if st.session_state.mode_quiz:
     st.rerun()
     st.stop()
 
-    # Langkah 3: Evaluasi
+# ✅ Jika semua soal sudah dijawab, tampilkan hasil evaluasi
+else:
     st.subheader("📊 Hasil Evaluasi")
     skor = 0
     for i, soal in enumerate(soal_data):
         user_jawaban = st.session_state.quiz_jawaban.get(i, "(Belum Dijawab)")
         benar = user_jawaban == soal["jawaban"]
-        ikon = "✅" if benar else "❌"
         warna = "green" if benar else "red"
+        ikon = "✅" if benar else "❌"
         if benar:
             skor += 1
         st.markdown(f"**Soal {i+1}: {ikon}**")
-        st.markdown(f"{soal['soal']}")
+        st.markdown(soal["soal"])
         st.markdown(f"**Jawabanmu:** {user_jawaban}")
         st.markdown(f"<span style='color:{warna};'>**Jawaban benar:** {soal['jawaban']}</span>", unsafe_allow_html=True)
         st.markdown(f"📝 *Pembahasan:* {soal['pembahasan']}")
         st.markdown("---")
 
-    # Setelah menampilkan skor akhir
     st.success(f"🎉 Skor kamu: {skor} dari {total_soal}")
-    st.session_state.show_balloons = True
 
-    # Tombol reset quiz
     if st.button("🔁 Ulangi Quiz"):
         for key in list(st.session_state.keys()):
             if key.startswith("soal") or key.startswith("quiz"):
@@ -214,7 +217,6 @@ if st.session_state.mode_quiz:
         st.session_state.mode_quiz = True
         st.rerun()
 
-    # Tombol kembali ke kalkulasi
     if st.button("📐 Kembali ke Mode Kalkulasi"):
         for key in list(st.session_state.keys()):
             if key.startswith("soal") or key.startswith("quiz"):

@@ -157,7 +157,7 @@ if st.session_state.mode_quiz:
             mode="gauge+number",
             value=sisa_waktu,
             domain={'x': [0, 1], 'y': [0, 1]},
-            title={'text': "⏳ Sisa Detik"},
+            title={'text': "⏳ Sisa Waktu (Detik)"},
             gauge={
                 'axis': {'range': [0, 15]},
                 'bar': {'color': "orange"},
@@ -170,7 +170,8 @@ if st.session_state.mode_quiz:
         ))
     
         # Tampilkan countdown animasi lingkaran
-        st.plotly_chart(fig, use_container_width=True)
+        fig.update_layout(height=250, width=400, margin=dict(t=30, b=10, l=10, r=10))
+        st.plotly_chart(fig)
     
         # Radio pilihan jawaban (disable jika waktu habis)
         jawaban = st.radio("Pilih jawaban:", soal["opsi"],

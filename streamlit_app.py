@@ -11,7 +11,14 @@ mode_anak = st.sidebar.checkbox("🌈 Aktifkan Mode Anak-anak")
 if mode_anak:
     st.markdown("<style>body {background-color: #FFF8DC; color: #333; font-size:18px;}</style>", unsafe_allow_html=True)
     st.balloons()
-    st.audio("audio/yay.mp3", format="audio/mp3")
+    st.markdown(
+        """
+        <audio autoplay>
+            <source src="audio/yay.mp3" type="audio/mpeg">
+        </audio>
+        """,
+        unsafe_allow_html=True
+    )
 
 # Gambar tiap bangun
 gambar_dict = {

@@ -155,7 +155,7 @@ if st.session_state.mode_quiz:
         countdown_html = f"""
         <div style="position: absolute; top: 100px; right: 20px; width: 150px;">
             <div style="height: 18px; background-color: #eee; border-radius: 10px; overflow: hidden; box-shadow: 1px 1px 3px rgba(0,0,0,0.1);">
-                <div style="width: {(sisa_waktu / 15) * 100}%; background-color: {warna}; height: 100%;
+                <div style="width: {(sisa_waktu / 25) * 100}%; background-color: {warna}; height: 100%;
                             text-align: center; color: white; font-size: 13px; font-weight: bold;">
                     ⏳ {sisa_waktu} detik
                 </div>

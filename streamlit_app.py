@@ -29,7 +29,7 @@ if "tema_anak" not in st.session_state:
 # Jika sedang di halaman loading (untuk animasi berjalan)
 if st.session_state.loading_page:
     st.markdown("<h4 style='text-align:center;'>⏳ Memuat permainan seru untukmu...</h4>", unsafe_allow_html=True)
-    progress_bar = st.progress(0)
+    progress_bar = st.progress(100)
     percent_text = st.empty()
 
     for i in range(101):

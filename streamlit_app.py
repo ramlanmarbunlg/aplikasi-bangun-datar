@@ -130,9 +130,9 @@ if st.session_state.mode_quiz:
         st.stop()
 
     # Langkah 2: Jalankan quiz sesuai kategori
-soal_data = [s for s in all_soal if s["kategori"] == st.session_state.quiz_kategori]
-total_soal = len(soal_data)
-indeks = st.session_state.quiz_index
+    soal_data = [s for s in all_soal if s["kategori"] == st.session_state.quiz_kategori]
+    total_soal = len(soal_data)
+    indeks = st.session_state.quiz_index
 
 # Soal masih ada
 if indeks < total_soal:

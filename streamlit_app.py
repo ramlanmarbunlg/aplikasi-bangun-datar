@@ -227,8 +227,6 @@ if st.button("📐 Kembali ke Mode Kalkulasi"):
     st.session_state.quiz_kategori = None
     st.rerun()
 
-st.stop()
-
 # ============= MODE KALKULASI BANGUN DATAR=============
 # Gambar ilustrasi tiap bangun
 gambar_dict = {

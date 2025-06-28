@@ -172,32 +172,23 @@ if st.session_state.mode_quiz:
         # Tampilkan countdown animasi lingkaran
         fig.update_layout(height=250, width=400, margin=dict(t=30, b=10, l=10, r=10))
         st.plotly_chart(fig)
-    
-        # Radio pilihan jawaban (disable jika waktu habis)
-        jawaban = st.radio("Pilih jawaban:", soal["opsi"],
-                           key=f"soal{indeks}",
-                           disabled=sisa_waktu == 0)
-    
-        # Jika waktu habis, lanjut otomatis
+
+        jawaban_disabled = sisa_waktu == 0
+        jawaban = st.radio("Pilih jawaban:", soal["opsi"], key=f"soal{indeks}", disabled=jawaban_disabled)
+
         if sisa_waktu == 0:
-            st.warning("⏰ Waktu habis! Soal akan lanjut...")
-            if indeks not in st.session_state.quiz_jawaban:
-                st.session_state.quiz_jawaban[indeks] = jawaban
-                st.session_state.quiz_index += 1
-                st.session_state.start_time = time.time()
-                st.experimental_rerun()
-        else:
-            # Delay 1 detik dan rerun (agar animasi countdown hidup)
-            time.sleep(1)
-            st.experimental_rerun()
-    
-        # Tombol lanjut jika belum habis
-        if sisa_waktu > 0 and st.button("✅ Jawab dan Lanjut"):
+            st.warning("⏰ Waktu habis!")
             st.session_state.quiz_jawaban[indeks] = jawaban
             st.session_state.quiz_index += 1
             st.session_state.start_time = time.time()
             st.rerun()
-    
+
+        if st.button("✅ Jawab dan Lanjut") and not jawaban_disabled:
+            st.session_state.quiz_jawaban[indeks] = jawaban
+            st.session_state.quiz_index += 1
+            st.session_state.start_time = time.time()
+            st.rerun()
+
         st.stop()
         
     # Langkah 3: Evaluasi

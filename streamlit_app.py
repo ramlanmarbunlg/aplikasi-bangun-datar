@@ -147,22 +147,24 @@ if st.session_state.mode_quiz:
         # Timer dan countdown
         elapsed = int(time.time() - st.session_state.start_time)
         sisa_waktu = max(0, 20 - elapsed)
-
-        # Warna dinamis berdasarkan sisa waktu
-        warna = "lightgreen" if sisa_waktu > 15 else "orange" if sisa_waktu > 5 else "red"
-
-        # Countdown horizontal minimalis di kanan atas
-        countdown_html = f"""
-        <div style="position: absolute; top: 100px; right: 20px; width: 150px;">
-            <div style="height: 18px; background-color: #eee; border-radius: 10px; overflow: hidden; box-shadow: 1px 1px 3px rgba(0,0,0,0.1);">
-                <div style="width: {(sisa_waktu / 25) * 100}%; background-color: {warna}; height: 100%;
-                            text-align: center; color: white; font-size: 13px; font-weight: bold;">
-                    ⏳ {sisa_waktu} detik
+        
+        # Warna dinamis countdown
+        warna = "lightgreen" if sisa_waktu > 15 else "orange" if sisa_waktu > 10 else "red"
+        
+        # Countdown horizontal minimalis - di atas soal, tengah
+        st.markdown(
+            f"""
+            <div style="text-align:center; margin-top: -10px; margin-bottom: 10px;">
+                <div style="display: inline-block; width: 90%%; background-color: #eee; border-radius: 10px; overflow: hidden;">
+                    <div style="width: {(sisa_waktu / 20) * 100:.1f}%%; background-color: {warna}; height: 28px;
+                                text-align: center; line-height: 28px; color: white; font-size: 18px; font-weight: bold;">
+                        ⏳ {sisa_waktu} detik
+                    </div>
                 </div>
             </div>
-        </div>
-        """
-        st.markdown(countdown_html, unsafe_allow_html=True)
+            """,
+            unsafe_allow_html=True
+        )
 
         jawaban_disabled = sisa_waktu == 0
         jawaban = st.radio("Pilih jawaban:", soal["opsi"], key=f"soal{indeks}", disabled=jawaban_disabled)

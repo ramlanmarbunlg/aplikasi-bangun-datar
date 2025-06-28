@@ -28,7 +28,7 @@ if "tema_anak" not in st.session_state:
 
 # Jika sedang di halaman loading (untuk animasi berjalan)
 if st.session_state.loading_page:
-    st.image("images/loading_emoji.gif", width=150, caption="🎉 Yuk kita mulai!", layout="centered")
+    st.image("images/loading_emoji.gif", width=150, caption="🎉 Yuk kita mulai!")
     st.markdown("<h4 style='text-align:center;'>Memuat permainan seru...</h4>", unsafe_allow_html=True)
     time.sleep(5)
     st.session_state.loading_page = False

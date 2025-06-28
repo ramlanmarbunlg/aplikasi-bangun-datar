@@ -190,42 +190,42 @@ if st.session_state.mode_quiz:
     st.rerun()
     st.stop()
 
-# ✅ Jika semua soal sudah dijawab, tampilkan hasil evaluasi
-else:
-    st.subheader("📊 Hasil Evaluasi")
-    skor = 0
-    for i, soal in enumerate(soal_data):
-        user_jawaban = st.session_state.quiz_jawaban.get(i, "(Belum Dijawab)")
-        benar = user_jawaban == soal["jawaban"]
-        warna = "green" if benar else "red"
-        ikon = "✅" if benar else "❌"
-        if benar:
-            skor += 1
-        st.markdown(f"**Soal {i+1}: {ikon}**")
-        st.markdown(soal["soal"])
-        st.markdown(f"**Jawabanmu:** {user_jawaban}")
-        st.markdown(f"<span style='color:{warna};'>**Jawaban benar:** {soal['jawaban']}</span>", unsafe_allow_html=True)
-        st.markdown(f"📝 *Pembahasan:* {soal['pembahasan']}")
-        st.markdown("---")
-
-    st.success(f"🎉 Skor kamu: {skor} dari {total_soal}")
-
-    if st.button("🔁 Ulangi Quiz"):
-        for key in list(st.session_state.keys()):
-            if key.startswith("soal") or key.startswith("quiz"):
-                del st.session_state[key]
-        st.session_state.mode_quiz = True
-        st.rerun()
-
-    if st.button("📐 Kembali ke Mode Kalkulasi"):
-        for key in list(st.session_state.keys()):
-            if key.startswith("soal") or key.startswith("quiz"):
-                del st.session_state[key]
-        st.session_state.mode_quiz = False
-        st.session_state.quiz_kategori = None
-        st.rerun()
-
-    st.stop()
+    # ✅ Jika semua soal sudah dijawab, tampilkan hasil evaluasi
+    else:
+        st.subheader("📊 Hasil Evaluasi")
+        skor = 0
+        for i, soal in enumerate(soal_data):
+            user_jawaban = st.session_state.quiz_jawaban.get(i, "(Belum Dijawab)")
+            benar = user_jawaban == soal["jawaban"]
+            warna = "green" if benar else "red"
+            ikon = "✅" if benar else "❌"
+            if benar:
+                skor += 1
+            st.markdown(f"**Soal {i+1}: {ikon}**")
+            st.markdown(soal["soal"])
+            st.markdown(f"**Jawabanmu:** {user_jawaban}")
+            st.markdown(f"<span style='color:{warna};'>**Jawaban benar:** {soal['jawaban']}</span>", unsafe_allow_html=True)
+            st.markdown(f"📝 *Pembahasan:* {soal['pembahasan']}")
+            st.markdown("---")
+    
+        st.success(f"🎉 Skor kamu: {skor} dari {total_soal}")
+    
+        if st.button("🔁 Ulangi Quiz"):
+            for key in list(st.session_state.keys()):
+                if key.startswith("soal") or key.startswith("quiz"):
+                    del st.session_state[key]
+            st.session_state.mode_quiz = True
+            st.rerun()
+    
+        if st.button("📐 Kembali ke Mode Kalkulasi"):
+            for key in list(st.session_state.keys()):
+                if key.startswith("soal") or key.startswith("quiz"):
+                    del st.session_state[key]
+            st.session_state.mode_quiz = False
+            st.session_state.quiz_kategori = None
+            st.rerun()
+    
+        st.stop()
 
 # ============= MODE KALKULASI BANGUN DATAR=============
 # Gambar ilustrasi tiap bangun

@@ -144,20 +144,31 @@ if st.session_state.mode_quiz:
         st.progress(progress)
         st.subheader(soal["soal"])
 
-        # Timer dan countdown
+         # Timer & countdown sederhana
         elapsed = int(time.time() - st.session_state.start_time)
-        sisa_waktu = max(0, 20 - elapsed)
+        sisa_waktu = max(0, 15 - elapsed)
         
-        # Warna dinamis countdown
-        warna = "lightgreen" if sisa_waktu > 15 else "orange" if sisa_waktu > 10 else "red"
+        # Warna dinamis
+        warna = "lightgreen" if sisa_waktu > 10 else "orange" if sisa_waktu > 5 else "red"
         
-        # Countdown horizontal minimalis - di atas soal, tengah
+        # Countdown sticky kanan atas
         st.markdown(
             f"""
-            <div style="text-align:center; margin-top: -10px; margin-bottom: 10px;">
-                <div style="display: inline-block; width: 90%%; background-color: #eee; border-radius: 10px; overflow: hidden;">
-                    <div style="width: {(sisa_waktu / 20) * 100:.1f}%%; background-color: {warna}; height: 28px;
-                                text-align: center; line-height: 28px; color: white; font-size: 18px; font-weight: bold;">
+            <style>
+            .countdown-timer {{
+                position: fixed;
+                top: 10px;
+                right: 20px;
+                width: 150px;
+                z-index: 9999;
+                font-family: Arial, sans-serif;
+                box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+            }}
+            </style>
+            <div class="countdown-timer">
+                <div style="width: 100%; background-color: #eee; border-radius: 10px; overflow: hidden;">
+                    <div style="width: {(sisa_waktu / 15) * 100:.1f}%; background-color: {warna}; height: 30px;
+                                text-align: center; line-height: 30px; color: white; font-size: 16px; font-weight: bold;">
                         ⏳ {sisa_waktu} detik
                     </div>
                 </div>
@@ -165,6 +176,14 @@ if st.session_state.mode_quiz:
             """,
             unsafe_allow_html=True
         )
+        
+        # Suara beep saat sisa waktu < 5 detik
+        if sisa_waktu <= 5 and sisa_waktu > 0:
+            st.markdown("""
+                <audio autoplay>
+                    <source src="https://www.soundjay.com/button/sounds/beep-07.mp3" type="audio/mpeg">
+                </audio>
+            """, unsafe_allow_html=True)
 
         jawaban_disabled = sisa_waktu == 0
         jawaban = st.radio("Pilih jawaban:", soal["opsi"], key=f"soal{indeks}", disabled=jawaban_disabled)

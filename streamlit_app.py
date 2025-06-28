@@ -139,9 +139,9 @@ if st.session_state.mode_quiz:
         st.error("❌ Tidak ada soal untuk kategori ini.")
         st.stop()
 
-        # Progress bar aman
-        progress = min((indeks + 1) / total_soal, 1.0)
-        st.progress(progress)
+# Progress bar aman
+progress = min((indeks + 1) / total_soal, 1.0)
+st.progress(progress)
 
     # ✅ Jika masih ada soal yang harus dijawab
     if indeks < total_soal:

@@ -10,7 +10,7 @@ import os
 # Konfigurasi halaman
 st.set_page_config(page_title="🎲 Bangun Datar Anak", layout="centered")
 
-# Tema warna ceria dinamis
+# Tema warna ceria
 warna_ceria = [
     {"bg": "#FFF8DC", "text": "#333333"},
     {"bg": "#FFFAF0", "text": "#FF1493"},
@@ -19,38 +19,64 @@ warna_ceria = [
     {"bg": "#FFF0F5", "text": "#DC143C"},
 ]
 
-# ======== INISIALISASI SESSION STATE ========
 # Inisialisasi session state
-if "mulai_main" not in st.session_state:
-    st.session_state.mulai_main = False
-if "loading_page" not in st.session_state:
-    st.session_state.loading_page = False
-if "mode_anak" not in st.session_state:
-    st.session_state.mode_anak = False
-if "tema_anak" not in st.session_state:
-    st.session_state.tema_anak = random.choice(warna_ceria)
-if "mode_quiz" not in st.session_state:
-    st.session_state.mode_quiz = False
-if "quiz_kategori" not in st.session_state:
-    st.session_state.quiz_kategori = None
-if "quiz_index" not in st.session_state:
-    st.session_state.quiz_index = 0
-if "quiz_jawaban" not in st.session_state:
-    st.session_state.quiz_jawaban = {}
-if "start_time" not in st.session_state:
-    st.session_state.start_time = time.time()
+def init_state():
+    defaults = {
+        "mulai_main": False,
+        "loading_page": False,
+        "mode_anak": False,
+        "tema_anak": random.choice(warna_ceria),
+        "mode_quiz": False,
+        "quiz_kategori": None,
+        "quiz_index": 0,
+        "quiz_jawaban": {},
+        "start_time": time.time()
+    }
+    for key, val in defaults.items():
+        if key not in st.session_state:
+            st.session_state[key] = val
 
-# ======== MODE QUIZ ========
+init_state()
+
+# ========== HALAMAN SELAMAT DATANG ==========
+if not st.session_state.mulai_main:
+    st.markdown(f"<h1 style='text-align:center; color:{st.session_state.tema_anak['text']}'>✨ Selamat Datang Anak Hebat! ✨</h1>", unsafe_allow_html=True)
+    st.image("images/anak.png", width=200)
+    st.markdown("<p style='text-align:center; font-size:20px;'>Ayo belajar sambil bermain dengan bentuk-bentuk bangun datar!</p>", unsafe_allow_html=True)
+
+    # Progress loading
+    progress_placeholder = st.empty()
+    bar = progress_placeholder.progress(0)
+    for i in range(100):
+        time.sleep(0.015)
+        bar.progress(i + 1)
+    progress_placeholder.empty()
+
+    st.markdown("---")
+    st.subheader("🎯 Pilih Mode")
+
+    col1, col2 = st.columns(2)
+    with col1:
+        if st.button("📀 Mode Kalkulasi"):
+            st.session_state.mulai_main = True
+            st.session_state.mode_quiz = False
+            st.rerun()
+    with col2:
+        if st.button("🧠 Mode Quiz"):
+            st.session_state.mulai_main = True
+            st.session_state.mode_quiz = True
+            st.rerun()
+    st.stop()
+
+# ========== MODE QUIZ ==========
 if st.session_state.mode_quiz:
-    # === LOAD SOAL ===
     with open("soal_quiz.json") as f:
         all_soal = json.load(f)
     kategori_list = sorted(list(set([s["kategori"] for s in all_soal])))
 
-    # === LANGKAH 1: PILIH KATEGORI ===
     if not st.session_state.quiz_kategori:
         st.header("📚 Pilih Kategori Quiz")
-        kategori = st.selectbox("📐 Pilih kategori bangun datar:", kategori_list)
+        kategori = st.selectbox("📀 Pilih kategori bangun datar:", kategori_list)
         if st.button("🚀 Mulai Quiz"):
             st.session_state.quiz_kategori = kategori
             st.session_state.quiz_index = 0
@@ -59,7 +85,6 @@ if st.session_state.mode_quiz:
             st.rerun()
         st.stop()
 
-    # === LANGKAH 2: TAMPILKAN SOAL PER INDEX ===
     soal_data = [s for s in all_soal if s["kategori"] == st.session_state.quiz_kategori]
     total_soal = len(soal_data)
     indeks = st.session_state.quiz_index
@@ -69,27 +94,19 @@ if st.session_state.mode_quiz:
 
         st.header(f"🎓 Quiz: {soal['kategori']} - Soal {indeks + 1} dari {total_soal}")
         st.progress((indeks + 1) / total_soal)
-
         st.subheader(soal["soal"])
 
-        # Timer
         elapsed = int(time.time() - st.session_state.start_time)
         sisa_waktu = max(0, 15 - elapsed)
-
-        # Warna bar countdown
         warna = "green" if sisa_waktu > 10 else "orange" if sisa_waktu > 5 else "red"
 
-        # Countdown bar minimalis
-        st.markdown(
-            f"""
-            <div style="height: 20px; background-color: #eee; border-radius: 10px; overflow: hidden;">
-                <div style="width: {(sisa_waktu / 15) * 100}%; background-color: {warna}; height: 100%; text-align: center; color: white; font-weight: bold;">
-                    ⏳ {sisa_waktu} detik
-                </div>
+        st.markdown(f"""
+        <div style="height: 20px; background-color: #eee; border-radius: 10px; overflow: hidden;">
+            <div style="width: {(sisa_waktu / 15) * 100}%; background-color: {warna}; height: 100%; text-align: center; color: white; font-weight: bold;">
+                ⏳ {sisa_waktu} detik
             </div>
-            """,
-            unsafe_allow_html=True
-        )
+        </div>
+        """, unsafe_allow_html=True)
 
         jawaban_disabled = sisa_waktu == 0
         jawaban = st.radio("Pilih jawaban:", soal["opsi"], key=f"soal{indeks}", disabled=jawaban_disabled)
@@ -109,7 +126,6 @@ if st.session_state.mode_quiz:
 
         st.stop()
 
-    # === LANGKAH 3: EVALUASI ===
     st.subheader("📊 Hasil Evaluasi")
     skor = 0
     for i, soal in enumerate(soal_data):
@@ -119,17 +135,14 @@ if st.session_state.mode_quiz:
         warna = "green" if benar else "red"
         if benar:
             skor += 1
-
         st.markdown(f"**Soal {i+1}: {ikon}**")
         st.markdown(soal["soal"])
         st.markdown(f"**Jawabanmu:** {user_jawaban}")
         st.markdown(f"<span style='color:{warna};'>**Jawaban benar:** {soal['jawaban']}</span>", unsafe_allow_html=True)
         st.markdown(f"📝 *Pembahasan:* {soal['pembahasan']}")
         st.markdown("---")
-
     st.success(f"🎉 Skor kamu: {skor} dari {total_soal}")
 
-    # === TOMBOL RESET ===
     if st.button("🔁 Ulangi Quiz"):
         for key in list(st.session_state.keys()):
             if key.startswith("soal") or key.startswith("quiz"):
@@ -137,12 +150,13 @@ if st.session_state.mode_quiz:
         st.session_state.mode_quiz = True
         st.rerun()
 
-    if st.button("📐 Kembali ke Mode Kalkulasi"):
+    if st.button("📀 Kembali ke Mode Kalkulasi"):
         for key in list(st.session_state.keys()):
             if key.startswith("soal") or key.startswith("quiz"):
                 del st.session_state[key]
         st.session_state.mode_quiz = False
         st.session_state.quiz_kategori = None
+        st.session_state.mulai_main = False
         st.rerun()
 
     st.stop()

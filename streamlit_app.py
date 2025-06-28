@@ -8,7 +8,7 @@ import json
 import os
 
 # Konfigurasi halaman
-st.set_page_config(page_title="🎲 Bangun Datar Anak", layout="centered")
+st.set_page_config(page_title="🎲 Bangun Datar Anak xxx", layout="centered")
 
 # Tema warna ceria dinamis
 warna_ceria = [

@@ -1,33 +1,59 @@
 import streamlit as st
 import math
 from PIL import Image
+import time
+import random
 
 # Konfigurasi halaman
 st.set_page_config(page_title="🎲 Bangun Datar Anak", layout="centered")
 
-# Cek apakah sudah mulai
+# Warna latar & teks ceria
+warna_ceria = [
+    {"bg": "#FFF8DC", "text": "#333333"},
+    {"bg": "#FFFAF0", "text": "#FF1493"},
+    {"bg": "#E0FFFF", "text": "#008080"},
+    {"bg": "#FDF5E6", "text": "#8B008B"},
+    {"bg": "#FFF0F5", "text": "#DC143C"},
+]
+
+# Cek sesi awal
 if "mulai_main" not in st.session_state:
     st.session_state.mulai_main = False
+
+if "tema_anak" not in st.session_state:
+    st.session_state.tema_anak = random.choice(warna_ceria)
 
 # Halaman pembuka
 if not st.session_state.mulai_main:
     st.markdown("<h1 style='text-align: center; color: #FF69B4;'>🎉 Selamat Datang Anak Hebat!</h1>", unsafe_allow_html=True)
     st.markdown("<h3 style='text-align: center;'>Mari belajar bangun datar sambil bermain 🧠🎨</h3>", unsafe_allow_html=True)
     st.image("images/karakter1.png", width=150, caption="Ayo mulai petualanganmu!")
-    
+
     if st.button("👉 Klik untuk Mulai Bermain 🎲", type="primary"):
+        with st.spinner("🎮 Memuat permainan seru..."):
+            st.image("images/loading_emoji.gif", width=150, caption="🎉 Yuk kita mulai!")
+            time.sleep(2.5)
         st.session_state.mulai_main = True
-        st.session_state.mode_anak = True  # Otomatis aktifkan mode anak
+        st.session_state.mode_anak = True
         st.rerun()
 
     st.stop()
 
 # --------- MAIN APLIKASI ---------
-# Aktifkan mode anak-anak jika dipilih
 mode_anak = st.session_state.get("mode_anak", False)
 
+# Tema anak aktif
 if mode_anak:
-    st.markdown("<style>body {background-color: #FFF8DC; color: #333; font-size:18px;}</style>", unsafe_allow_html=True)
+    tema = st.session_state.get("tema_anak", {"bg": "#FFF8DC", "text": "#333"})
+    st.markdown(f"""
+        <style>
+        body {{
+            background-color: {tema['bg']};
+            color: {tema['text']};
+            font-size: 18px;
+        }}
+        </style>
+        """, unsafe_allow_html=True)
     st.balloons()
     st.markdown(
         """
@@ -38,7 +64,13 @@ if mode_anak:
         unsafe_allow_html=True
     )
 
-# Bangun datar & gambar
+# Tombol kembali ke halaman awal
+st.sidebar.markdown("---")
+if st.sidebar.button("🔙 Kembali ke Halaman Awal"):
+    st.session_state.mulai_main = False
+    st.rerun()
+
+# Gambar bangun datar
 gambar_dict = {
     "Persegi": "images/persegi.png",
     "Persegi Panjang": "images/persegi_panjang.png",
@@ -50,7 +82,7 @@ gambar_dict = {
     "Layang-Layang": "images/layang_layang.png"
 }
 
-# Fungsi perhitungan
+# Fungsi
 def luas_persegi(s): return s**2
 def keliling_persegi(s): return 4 * s
 def luas_persegi_panjang(p, l): return p * l
@@ -68,7 +100,7 @@ def keliling_belah_ketupat(s): return 4 * s
 def luas_layang_layang(d1, d2): return 0.5 * d1 * d2
 def keliling_layang_layang(a, b): return 2 * (a + b)
 
-# Sidebar menu
+# Sidebar bangun
 st.sidebar.title("📐 Pilih Bangun Datar")
 bangun = st.sidebar.selectbox("🔷 Bangun Datar", list(gambar_dict.keys()))
 
@@ -160,7 +192,6 @@ link_dict = {
     "Belah Ketupat": "https://id.wikipedia.org/wiki/Belah_ketupat",
     "Layang-Layang": "https://id.wikipedia.org/wiki/Layang-layang_(geometri)"
 }
-
 st.markdown(f"📚 [Baca materi lengkap tentang {bangun}]({link_dict[bangun]})")
 
 # Footer

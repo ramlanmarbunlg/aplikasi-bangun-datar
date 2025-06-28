@@ -72,24 +72,6 @@ def keliling_layang_layang(a, b): return 2 * (a + b)
 st.sidebar.title("📐 Pilih Bangun Datar")
 bangun = st.sidebar.selectbox("🔷 Bangun Datar", list(gambar_dict.keys()))
 
-# Gambar dan link materi
-img = Image.open(gambar_dict[bangun])
-img_resized = img.resize((150, 150))
-st.image(img_resized, caption=f"Gambar {bangun}")
-
-# Link materi (contoh)
-link_dict = {
-    "Persegi": "https://example.com/persegi",
-    "Persegi Panjang": "https://example.com/persegi-panjang",
-    "Segitiga": "https://example.com/segitiga",
-    "Lingkaran": "https://example.com/lingkaran",
-    "Jajar Genjang": "https://example.com/jajar-genjang",
-    "Trapesium": "https://example.com/trapesium",
-    "Belah Ketupat": "https://example.com/belah-ketupat",
-    "Layang-Layang": "https://example.com/layang-layang"
-}
-st.markdown(f"📚 [Baca materi lengkap tentang {bangun}]({link_dict[bangun]})")
-
 # Tab luas dan keliling
 tab1, tab2 = st.tabs(["📏 Luas", "📏 Keliling"])
 
@@ -161,6 +143,25 @@ with tab2:
         a = st.number_input("Sisi A", min_value=0.0, key="a_kel_ll")
         b = st.number_input("Sisi B", min_value=0.0, key="b_kel_ll")
         st.success(f"Keliling: {keliling_layang_layang(a, b)}")
+
+# Gambar dan link materi
+img = Image.open(gambar_dict[bangun])
+img_resized = img.resize((150, 150))
+st.image(img_resized, caption=f"Gambar {bangun}")
+
+# Link materi bacaan
+link_dict = {
+    "Persegi": "https://id.wikipedia.org/wiki/Persegi",
+    "Persegi Panjang": "https://id.wikipedia.org/wiki/Persegi_panjang",
+    "Segitiga": "https://id.wikipedia.org/wiki/Segitiga",
+    "Lingkaran": "https://id.wikipedia.org/wiki/Lingkaran",
+    "Jajar Genjang": "https://id.wikipedia.org/wiki/Jajar_genjang",
+    "Trapesium": "https://id.wikipedia.org/wiki/Trapesium_(geometri)",
+    "Belah Ketupat": "https://id.wikipedia.org/wiki/Belah_ketupat",
+    "Layang-Layang": "https://id.wikipedia.org/wiki/Layang-layang_(geometri)"
+}
+
+st.markdown(f"📚 [Baca materi lengkap tentang {bangun}]({link_dict[bangun]})")
 
 # Footer
 st.markdown("---")

@@ -134,10 +134,10 @@ if st.session_state.mode_quiz:
     total_soal = len(soal_data)
     indeks = st.session_state.quiz_index
 
-# Cegah pembagian nol
-if total_soal == 0:
-    st.error("❌ Tidak ada soal untuk kategori ini.")
-    st.stop()
+    # Cegah pembagian nol
+    if total_soal == 0:
+        st.error("❌ Tidak ada soal untuk kategori ini.")
+        st.stop()
 
 # Progress bar aman
 progress = min((indeks + 1) / total_soal, 1.0)

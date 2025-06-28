@@ -138,7 +138,7 @@ if st.session_state.mode_quiz:
         st.progress((indeks + 1) / total_soal)
 
         # === Timer countdown 20 detik ===
-        MAX_WAKTU = 20
+        MAX_WAKTU = 15
         elapsed = int(time.time() - st.session_state.start_time)
         sisa_waktu = max(0, MAX_WAKTU - elapsed)
 
@@ -147,7 +147,7 @@ if st.session_state.mode_quiz:
             go.Pie(
                 values=[sisa_waktu, MAX_WAKTU - sisa_waktu],
                 labels=["Sisa", ""],
-                hole=0.7,
+                hole=0.5,
                 marker_colors=["#FF6347", "#eee"],
                 textinfo="none",
                 direction="clockwise",

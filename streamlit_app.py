@@ -20,6 +20,15 @@ warna_ceria = [
 ]
 
 # ======== INISIALISASI SESSION STATE ========
+# Inisialisasi session state
+if "mulai_main" not in st.session_state:
+    st.session_state.mulai_main = False
+if "loading_page" not in st.session_state:
+    st.session_state.loading_page = False
+if "mode_anak" not in st.session_state:
+    st.session_state.mode_anak = False
+if "tema_anak" not in st.session_state:
+    st.session_state.tema_anak = random.choice(warna_ceria)
 if "mode_quiz" not in st.session_state:
     st.session_state.mode_quiz = False
 if "quiz_kategori" not in st.session_state:

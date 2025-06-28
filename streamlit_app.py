@@ -62,8 +62,9 @@ if not st.session_state.mulai_main:
     st.image("images/karakter1.png", width=150, caption="Ayo mulai petualanganmu!")
 
     if st.button("👉 Klik untuk Mulai Bermain 🎲", type="primary"):
-        st.session_state.loading_page = True
-        st.rerun()
+    st.session_state.loading_page = True
+    st.session_state.show_balloons = True  # nyalakan balon saat mulai
+    st.rerun()
 
     st.stop()
 
@@ -79,7 +80,11 @@ if st.session_state.mode_anak:
         }}
         </style>
     """, unsafe_allow_html=True)
-    st.balloons()
+
+    # Munculkan balon hanya jika flag aktif
+    if st.session_state.get("show_balloons", False):
+        st.balloons()
+        st.session_state.show_balloons = False  # reset agar tidak muncul terus balloons
 
 # Sidebar
 if st.sidebar.button("🔙 Halaman Awal"):
@@ -145,7 +150,7 @@ if st.session_state.mode_quiz:
             st.session_state.start_time = time.time()
     
         elapsed = int(time.time() - st.session_state.start_time)
-        sisa_waktu = max(0, 15 - elapsed)
+        sisa_waktu = max(0, 20 - elapsed)
     
         # Plotly countdown circle
         fig = go.Figure(go.Indicator(
@@ -154,11 +159,12 @@ if st.session_state.mode_quiz:
             domain={'x': [0, 1], 'y': [0, 1]},
             title={'text': "⏳ Sisa Detik"},
             gauge={
-                'axis': {'range': [0, 15]},
+                'axis': {'range': [0, 20]},
                 'bar': {'color': "orange"},
                 'steps': [
                     {'range': [0, 5], 'color': "red"},
                     {'range': [5, 10], 'color': "yellow"},
+                    {'range': [10, 15], 'color': "green"},
                     {'range': [10, 15], 'color': "lightgreen"},
                 ],
             }
@@ -211,7 +217,9 @@ if st.session_state.mode_quiz:
         st.markdown(f"📝 *Pembahasan:* {soal['pembahasan']}")
         st.markdown("---")
 
+    # Setelah menampilkan skor akhir
     st.success(f"🎉 Skor kamu: {skor} dari {total_soal}")
+    st.session_state.show_balloons = True
 
     # Tombol reset quiz
     if st.button("🔁 Ulangi Quiz"):

@@ -1,0 +1,57 @@
+[
+  {
+    "soal": "Berapakah luas persegi dengan sisi 4 cm?",
+    "opsi": [
+      "8 cm\u00b2",
+      "12 cm\u00b2",
+      "16 cm\u00b2",
+      "20 cm\u00b2"
+    ],
+    "jawaban": "16 cm\u00b2",
+    "pembahasan": "Luas persegi = sisi \u00d7 sisi = 4 \u00d7 4 = 16 cm\u00b2"
+  },
+  {
+    "soal": "Bangun datar dengan 4 sisi sama panjang adalah ...",
+    "opsi": [
+      "Lingkaran",
+      "Segitiga",
+      "Persegi",
+      "Trapesium"
+    ],
+    "jawaban": "Persegi",
+    "pembahasan": "Persegi memiliki 4 sisi sama panjang dan 4 sudut siku-siku."
+  },
+  {
+    "soal": "Keliling persegi panjang dengan panjang 5 cm dan lebar 3 cm adalah ...",
+    "opsi": [
+      "16 cm",
+      "15 cm",
+      "10 cm",
+      "18 cm"
+    ],
+    "jawaban": "16 cm",
+    "pembahasan": "Keliling = 2 \u00d7 (p + l) = 2 \u00d7 (5 + 3) = 2 \u00d7 8 = 16 cm"
+  },
+  {
+    "soal": "Luas segitiga dengan alas 6 cm dan tinggi 4 cm adalah ...",
+    "opsi": [
+      "12 cm\u00b2",
+      "24 cm\u00b2",
+      "10 cm\u00b2",
+      "20 cm\u00b2"
+    ],
+    "jawaban": "12 cm\u00b2",
+    "pembahasan": "Luas = \u00bd \u00d7 alas \u00d7 tinggi = \u00bd \u00d7 6 \u00d7 4 = 12 cm\u00b2"
+  },
+  {
+    "soal": "Bangun datar yang memiliki satu sisi lengkung adalah ...",
+    "opsi": [
+      "Segitiga",
+      "Jajar Genjang",
+      "Lingkaran",
+      "Belah Ketupat"
+    ],
+    "jawaban": "Lingkaran",
+    "pembahasan": "Lingkaran hanya memiliki satu sisi dan bentuknya melengkung."
+  }
+]

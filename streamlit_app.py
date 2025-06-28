@@ -180,7 +180,6 @@ if st.session_state.mode_quiz:
 else:
     # Evaluasi akhir quiz (soal sudah selesai)
     st.subheader("📊 Hasil Evaluasi")
-    soal_data = [s for s in all_soal if s["kategori"] == st.session_state.quiz_kategori]
     skor = 0
     for i, soal in enumerate(soal_data):
         user_jawaban = st.session_state.quiz_jawaban.get(i, "(Belum Dijawab)")

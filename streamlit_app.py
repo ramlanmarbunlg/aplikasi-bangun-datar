@@ -39,7 +39,7 @@ if "start_time" not in st.session_state:
 # Jika sedang di halaman loading
 if st.session_state.loading_page:
     st.markdown("<h4 style='text-align:center;'>⏳ Memuat permainan seru untukmu...</h4>", unsafe_allow_html=True)
-    progress_bar = st.progress(100)
+    progress_bar = st.progress(0)
     percent_text = st.empty()
     for i in range(101):
         time.sleep(0.05)
@@ -81,52 +81,22 @@ if st.session_state.mode_anak:
         </audio>
     """, unsafe_allow_html=True)
 
-# Gambar bangun datar
-gambar_dict = {
-    "Persegi": "images/persegi.png",
-    "Persegi Panjang": "images/persegi_panjang.png",
-    "Segitiga": "images/segitiga.png",
-    "Lingkaran": "images/lingkaran.png",
-    "Jajar Genjang": "images/jajar_genjang.png",
-    "Trapesium": "images/trapesium.png",
-    "Belah Ketupat": "images/belah_ketupat.png",
-    "Layang-Layang": "images/layang_layang.png"
-}
+# Sidebar
+st.sidebar.markdown("<h4 style='margin-bottom:10px;'>📐 Pilih Bangun Datar</h4>", unsafe_allow_html=True)
 
-# Fungsi
-def luas_persegi(s): return s**2
-def keliling_persegi(s): return 4 * s
-def luas_persegi_panjang(p, l): return p * l
-def keliling_persegi_panjang(p, l): return 2 * (p + l)
-def luas_segitiga(a, t): return 0.5 * a * t
-def keliling_segitiga(a, b, c): return a + b + c
-def luas_lingkaran(r): return math.pi * r**2
-def keliling_lingkaran(r): return 2 * math.pi * r
-def luas_jajar_genjang(a, t): return a * t
-def keliling_jajar_genjang(a, b): return 2 * (a + b)
-def luas_trapesium(a, b, t): return 0.5 * (a + b) * t
-def keliling_trapesium(a, b, c, d): return a + b + c + d
-def luas_belah_ketupat(d1, d2): return 0.5 * d1 * d2
-def keliling_belah_ketupat(s): return 4 * s
-def luas_layang_layang(d1, d2): return 0.5 * d1 * d2
-def keliling_layang_layang(a, b): return 2 * (a + b)
-
-# Sidebar bangun
-st.sidebar.markdown("<h3 style='margin-bottom:10px;'>📐 Pilih Bangun Datar</h3>", unsafe_allow_html=True)
-bangun = st.sidebar.selectbox("🔷 Bangun Datar", list(gambar_dict.keys()))
-
-if st.sidebar.button("🎯 Mode Quiz"):
+if st.sidebar.button("🎯 Mode Evaluasi/Quiz"):
     st.session_state.mode_quiz = True
     st.session_state.quiz_index = 0
     st.session_state.quiz_jawaban = {}
     st.session_state.start_time = time.time()
     st.rerun()
 
-if st.sidebar.button("🔙 Halaman Awal"):
+if st.sidebar.button("🔙 Kembali ke Halaman Awal"):
     st.session_state.mulai_main = False
     st.session_state.mode_quiz = False
     st.rerun()
 
+# MODE QUIZ
 if st.session_state.mode_quiz:
     st.header("🎓 Quiz Bangun Datar - Soal ke-" + str(st.session_state.quiz_index + 1))
 
@@ -191,84 +161,60 @@ if st.session_state.mode_quiz:
 
     st.stop()
 
-# Tab luas dan keliling
-tab1, tab2 = st.tabs(["📏 Luas", "🔷 Keliling"])
+# ========= KALKULASI BANGUN DATAR =========
+# Gambar ilustrasi tiap bangun
+gambar_dict = {
+    "Persegi": "images/persegi.png",
+    "Persegi Panjang": "images/persegi_panjang.png",
+    "Segitiga": "images/segitiga.png",
+    "Lingkaran": "images/lingkaran.png",
+    "Jajar Genjang": "images/jajar_genjang.png",
+    "Trapesium": "images/trapesium.png",
+    "Belah Ketupat": "images/belah_ketupat.png",
+    "Layang-Layang": "images/layang_layang.png"
+}
 
-with tab1:
-    st.subheader(f"Luas {bangun}")
-    if bangun == "Persegi":
-        s = st.number_input("Sisi", min_value=0.0, key="sisi_luas_persegi")
-        st.success(f"Luas: {luas_persegi(s)}")
-    elif bangun == "Persegi Panjang":
-        p = st.number_input("Panjang", min_value=0.0, key="p_luas_pp")
-        l = st.number_input("Lebar", min_value=0.0, key="l_luas_pp")
-        st.success(f"Luas: {luas_persegi_panjang(p, l)}")
-    elif bangun == "Segitiga":
-        a = st.number_input("Alas", min_value=0.0, key="a_luas_seg")
-        t = st.number_input("Tinggi", min_value=0.0, key="t_luas_seg")
-        st.success(f"Luas: {luas_segitiga(a, t)}")
-    elif bangun == "Lingkaran":
-        r = st.number_input("Jari-jari", min_value=0.0, key="r_luas_ling")
-        st.success(f"Luas: {luas_lingkaran(r):.2f}")
-    elif bangun == "Jajar Genjang":
-        a = st.number_input("Alas", min_value=0.0, key="a_luas_jg")
-        t = st.number_input("Tinggi", min_value=0.0, key="t_luas_jg")
-        st.success(f"Luas: {luas_jajar_genjang(a, t)}")
-    elif bangun == "Trapesium":
-        a = st.number_input("Sisi Atas", min_value=0.0, key="a_luas_trap")
-        b = st.number_input("Sisi Bawah", min_value=0.0, key="b_luas_trap")
-        t = st.number_input("Tinggi", min_value=0.0, key="t_luas_trap")
-        st.success(f"Luas: {luas_trapesium(a, b, t)}")
-    elif bangun == "Belah Ketupat":
-        d1 = st.number_input("Diagonal 1", min_value=0.0, key="d1_luas_bk")
-        d2 = st.number_input("Diagonal 2", min_value=0.0, key="d2_luas_bk")
-        st.success(f"Luas: {luas_belah_ketupat(d1, d2)}")
-    elif bangun == "Layang-Layang":
-        d1 = st.number_input("Diagonal 1", min_value=0.0, key="d1_luas_ll")
-        d2 = st.number_input("Diagonal 2", min_value=0.0, key="d2_luas_ll")
-        st.success(f"Luas: {luas_layang_layang(d1, d2)}")
+# Fungsi rumus masing-masing bangun
+# (Disusun sesuai kebutuhan Luas dan Keliling)
+def luas_persegi(s): return s**2
 
-with tab2:
-    st.subheader(f"Keliling {bangun}")
-    if bangun == "Persegi":
-        s = st.number_input("Sisi", min_value=0.0, key="sisi_kel_persegi")
-        st.success(f"Keliling: {keliling_persegi(s)}")
-    elif bangun == "Persegi Panjang":
-        p = st.number_input("Panjang", min_value=0.0, key="p_kel_pp")
-        l = st.number_input("Lebar", min_value=0.0, key="l_kel_pp")
-        st.success(f"Keliling: {keliling_persegi_panjang(p, l)}")
-    elif bangun == "Segitiga":
-        a = st.number_input("Sisi A", min_value=0.0, key="a_kel_seg")
-        b = st.number_input("Sisi B", min_value=0.0, key="b_kel_seg")
-        c = st.number_input("Sisi C", min_value=0.0, key="c_kel_seg")
-        st.success(f"Keliling: {keliling_segitiga(a, b, c)}")
-    elif bangun == "Lingkaran":
-        r = st.number_input("Jari-jari", min_value=0.0, key="r_kel_ling")
-        st.success(f"Keliling: {keliling_lingkaran(r):.2f}")
-    elif bangun == "Jajar Genjang":
-        a = st.number_input("Sisi A", min_value=0.0, key="a_kel_jg")
-        b = st.number_input("Sisi B", min_value=0.0, key="b_kel_jg")
-        st.success(f"Keliling: {keliling_jajar_genjang(a, b)}")
-    elif bangun == "Trapesium":
-        a = st.number_input("Sisi A", min_value=0.0, key="a_kel_trap")
-        b = st.number_input("Sisi B", min_value=0.0, key="b_kel_trap")
-        c = st.number_input("Sisi C", min_value=0.0, key="c_kel_trap")
-        d = st.number_input("Sisi D", min_value=0.0, key="d_kel_trap")
-        st.success(f"Keliling: {keliling_trapesium(a, b, c, d)}")
-    elif bangun == "Belah Ketupat":
-        s = st.number_input("Sisi", min_value=0.0, key="s_kel_bk")
-        st.success(f"Keliling: {keliling_belah_ketupat(s)}")
-    elif bangun == "Layang-Layang":
-        a = st.number_input("Sisi A", min_value=0.0, key="a_kel_ll")
-        b = st.number_input("Sisi B", min_value=0.0, key="b_kel_ll")
-        st.success(f"Keliling: {keliling_layang_layang(a, b)}")
+def keliling_persegi(s): return 4 * s
 
-# Gambar dan link materi
+def luas_persegi_panjang(p, l): return p * l
+
+def keliling_persegi_panjang(p, l): return 2 * (p + l)
+
+def luas_segitiga(a, t): return 0.5 * a * t
+
+def keliling_segitiga(a, b, c): return a + b + c
+
+def luas_lingkaran(r): return math.pi * r**2
+
+def keliling_lingkaran(r): return 2 * math.pi * r
+
+def luas_jajar_genjang(a, t): return a * t
+
+def keliling_jajar_genjang(a, b): return 2 * (a + b)
+
+def luas_trapesium(a, b, t): return 0.5 * (a + b) * t
+
+def keliling_trapesium(a, b, c, d): return a + b + c + d
+
+def luas_belah_ketupat(d1, d2): return 0.5 * d1 * d2
+
+def keliling_belah_ketupat(s): return 4 * s
+
+def luas_layang_layang(d1, d2): return 0.5 * d1 * d2
+
+def keliling_layang_layang(a, b): return 2 * (a + b)
+
+# Sidebar pilihan bangun datar
+bangun = st.sidebar.selectbox("🔷 Bangun Datar", list(gambar_dict.keys()))
+
+# Tampilkan gambar dan link materi
 img = Image.open(gambar_dict[bangun])
-img_resized = img.resize((150, 150))
-st.image(img_resized, caption=f"Gambar {bangun}")
+st.image(img.resize((150,150)), caption=f"Gambar {bangun}")
 
-# Link materi bacaan
 link_dict = {
     "Persegi": "https://id.wikipedia.org/wiki/Persegi",
     "Persegi Panjang": "https://id.wikipedia.org/wiki/Persegi_panjang",
@@ -279,7 +225,81 @@ link_dict = {
     "Belah Ketupat": "https://id.wikipedia.org/wiki/Belah_ketupat",
     "Layang-Layang": "https://id.wikipedia.org/wiki/Layang-layang_(geometri)"
 }
+
 st.markdown(f"📚 [Baca materi lengkap tentang {bangun}]({link_dict[bangun]})")
+
+# Tab Luas dan Keliling
+st.markdown("---")
+tab1, tab2 = st.tabs(["📏 Luas", "📐 Keliling"])
+
+with tab1:
+    st.subheader(f"Luas {bangun}")
+    if bangun == "Persegi":
+        s = st.number_input("Sisi", min_value=0.0, key="luas_s")
+        st.success(f"Luas: {luas_persegi(s)} cm²")
+    elif bangun == "Persegi Panjang":
+        p = st.number_input("Panjang", min_value=0.0, key="luas_p")
+        l = st.number_input("Lebar", min_value=0.0, key="luas_l")
+        st.success(f"Luas: {luas_persegi_panjang(p, l)} cm²")
+    elif bangun == "Segitiga":
+        a = st.number_input("Alas", min_value=0.0, key="luas_a")
+        t = st.number_input("Tinggi", min_value=0.0, key="luas_t")
+        st.success(f"Luas: {luas_segitiga(a, t)} cm²")
+    elif bangun == "Lingkaran":
+        r = st.number_input("Jari-jari", min_value=0.0, key="luas_r")
+        st.success(f"Luas: {luas_lingkaran(r):.2f} cm²")
+    elif bangun == "Jajar Genjang":
+        a = st.number_input("Alas", min_value=0.0, key="luas_ajg")
+        t = st.number_input("Tinggi", min_value=0.0, key="luas_tjg")
+        st.success(f"Luas: {luas_jajar_genjang(a, t)} cm²")
+    elif bangun == "Trapesium":
+        a = st.number_input("Sisi Atas", min_value=0.0, key="luas_a1t")
+        b = st.number_input("Sisi Bawah", min_value=0.0, key="luas_b1t")
+        t = st.number_input("Tinggi", min_value=0.0, key="luas_t1t")
+        st.success(f"Luas: {luas_trapesium(a, b, t)} cm²")
+    elif bangun == "Belah Ketupat":
+        d1 = st.number_input("Diagonal 1", min_value=0.0, key="luas_d1")
+        d2 = st.number_input("Diagonal 2", min_value=0.0, key="luas_d2")
+        st.success(f"Luas: {luas_belah_ketupat(d1, d2)} cm²")
+    elif bangun == "Layang-Layang":
+        d1 = st.number_input("Diagonal 1", min_value=0.0, key="luas_d1l")
+        d2 = st.number_input("Diagonal 2", min_value=0.0, key="luas_d2l")
+        st.success(f"Luas: {luas_layang_layang(d1, d2)} cm²")
+
+with tab2:
+    st.subheader(f"Keliling {bangun}")
+    if bangun == "Persegi":
+        s = st.number_input("Sisi", min_value=0.0, key="kel_s")
+        st.success(f"Keliling: {keliling_persegi(s)} cm")
+    elif bangun == "Persegi Panjang":
+        p = st.number_input("Panjang", min_value=0.0, key="kel_p")
+        l = st.number_input("Lebar", min_value=0.0, key="kel_l")
+        st.success(f"Keliling: {keliling_persegi_panjang(p, l)} cm")
+    elif bangun == "Segitiga":
+        a = st.number_input("Sisi A", min_value=0.0, key="kel_a")
+        b = st.number_input("Sisi B", min_value=0.0, key="kel_b")
+        c = st.number_input("Sisi C", min_value=0.0, key="kel_c")
+        st.success(f"Keliling: {keliling_segitiga(a, b, c)} cm")
+    elif bangun == "Lingkaran":
+        r = st.number_input("Jari-jari", min_value=0.0, key="kel_r")
+        st.success(f"Keliling: {keliling_lingkaran(r):.2f} cm")
+    elif bangun == "Jajar Genjang":
+        a = st.number_input("Sisi A", min_value=0.0, key="kel_ajg")
+        b = st.number_input("Sisi B", min_value=0.0, key="kel_bjg")
+        st.success(f"Keliling: {keliling_jajar_genjang(a, b)} cm")
+    elif bangun == "Trapesium":
+        a = st.number_input("Sisi A", min_value=0.0, key="kel_at")
+        b = st.number_input("Sisi B", min_value=0.0, key="kel_bt")
+        c = st.number_input("Sisi C", min_value=0.0, key="kel_ct")
+        d = st.number_input("Sisi D", min_value=0.0, key="kel_dt")
+        st.success(f"Keliling: {keliling_trapesium(a, b, c, d)} cm")
+    elif bangun == "Belah Ketupat":
+        s = st.number_input("Sisi", min_value=0.0, key="kel_sb")
+        st.success(f"Keliling: {keliling_belah_ketupat(s)} cm")
+    elif bangun == "Layang-Layang":
+        a = st.number_input("Sisi A", min_value=0.0, key="kel_ak")
+        b = st.number_input("Sisi B", min_value=0.0, key="kel_bk")
+        st.success(f"Keliling: {keliling_layang_layang(a, b)} cm")
 
 # Footer
 st.markdown("---")

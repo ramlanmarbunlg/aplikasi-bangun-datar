@@ -194,19 +194,19 @@ if st.session_state.mode_quiz:
 else:
     st.subheader("📊 Hasil Evaluasi")
     skor = 0
-    for i, soal in enumerate(soal_data):
-        user_jawaban = st.session_state.quiz_jawaban.get(i, "(Belum Dijawab)")
-        benar = user_jawaban == soal["jawaban"]
-        warna = "green" if benar else "red"
-        ikon = "✅" if benar else "❌"
-        if benar:
-            skor += 1
-            st.markdown(f"**Soal {i+1}: {ikon}**")
-            st.markdown(soal["soal"])
-            st.markdown(f"**Jawabanmu:** {user_jawaban}")
-            st.markdown(f"<span style='color:{warna};'>**Jawaban benar:** {soal['jawaban']}</span>", unsafe_allow_html=True)
-            st.markdown(f"📝 *Pembahasan:* {soal['pembahasan']}")
-            st.markdown("---")
+        for i, soal in enumerate(soal_data):
+            user_jawaban = st.session_state.quiz_jawaban.get(i, "(Belum Dijawab)")
+            benar = user_jawaban == soal["jawaban"]
+            warna = "green" if benar else "red"
+            ikon = "✅" if benar else "❌"
+            if benar:
+                skor += 1
+                st.markdown(f"**Soal {i+1}: {ikon}**")
+                st.markdown(soal["soal"])
+                st.markdown(f"**Jawabanmu:** {user_jawaban}")
+                st.markdown(f"<span style='color:{warna};'>**Jawaban benar:** {soal['jawaban']}</span>", unsafe_allow_html=True)
+                st.markdown(f"📝 *Pembahasan:* {soal['pembahasan']}")
+                st.markdown("---")
     
         st.success(f"🎉 Skor kamu: {skor} dari {total_soal}")
     

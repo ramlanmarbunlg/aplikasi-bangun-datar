@@ -170,7 +170,7 @@ if st.session_state.mode_quiz:
         if sisa_waktu <= 5 and sisa_waktu > 0:
             st.markdown("""
                 <audio autoplay>
-                    <source src="https://www.soundjay.com/button/sounds/beep-07.mp3" type="audio/mpeg">
+                    <source src="https://www.soundjay.com/buttons/sounds/beep-07a.mp3" type="audio/mpeg">
                 </audio>
             """, unsafe_allow_html=True)
 

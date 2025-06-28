@@ -13,7 +13,7 @@ if "mulai_main" not in st.session_state:
 if not st.session_state.mulai_main:
     st.markdown("<h1 style='text-align: center; color: #FF69B4;'>🎉 Selamat Datang Anak Hebat!</h1>", unsafe_allow_html=True)
     st.markdown("<h3 style='text-align: center;'>Mari belajar bangun datar sambil bermain 🧠🎨</h3>", unsafe_allow_html=True)
-    st.image("images/karakter1.png", width=200, caption="Ayo mulai petualanganmu!")
+    st.image("images/karakter1.png", width=150, caption="Ayo mulai petualanganmu!")
     
     if st.button("👉 Klik untuk Mulai Bermain 🎲", type="primary"):
         st.session_state.mulai_main = True

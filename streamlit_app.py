@@ -177,56 +177,24 @@ gambar_dict = {
 # Fungsi rumus masing-masing bangun
 # (Disusun sesuai kebutuhan Luas dan Keliling)
 def luas_persegi(s): return s**2
-
 def keliling_persegi(s): return 4 * s
-
 def luas_persegi_panjang(p, l): return p * l
-
 def keliling_persegi_panjang(p, l): return 2 * (p + l)
-
 def luas_segitiga(a, t): return 0.5 * a * t
-
 def keliling_segitiga(a, b, c): return a + b + c
-
 def luas_lingkaran(r): return math.pi * r**2
-
 def keliling_lingkaran(r): return 2 * math.pi * r
-
 def luas_jajar_genjang(a, t): return a * t
-
 def keliling_jajar_genjang(a, b): return 2 * (a + b)
-
 def luas_trapesium(a, b, t): return 0.5 * (a + b) * t
-
 def keliling_trapesium(a, b, c, d): return a + b + c + d
-
 def luas_belah_ketupat(d1, d2): return 0.5 * d1 * d2
-
 def keliling_belah_ketupat(s): return 4 * s
-
 def luas_layang_layang(d1, d2): return 0.5 * d1 * d2
-
 def keliling_layang_layang(a, b): return 2 * (a + b)
 
 # Sidebar pilihan bangun datar
 bangun = st.sidebar.selectbox("🔷 Bangun Datar", list(gambar_dict.keys()))
-
-# Tampilkan gambar dan link materi
-img = Image.open(gambar_dict[bangun])
-st.image(img.resize((150,150)), caption=f"Gambar {bangun}")
-
-link_dict = {
-    "Persegi": "https://id.wikipedia.org/wiki/Persegi",
-    "Persegi Panjang": "https://id.wikipedia.org/wiki/Persegi_panjang",
-    "Segitiga": "https://id.wikipedia.org/wiki/Segitiga",
-    "Lingkaran": "https://id.wikipedia.org/wiki/Lingkaran",
-    "Jajar Genjang": "https://id.wikipedia.org/wiki/Jajar_genjang",
-    "Trapesium": "https://id.wikipedia.org/wiki/Trapesium_(geometri)",
-    "Belah Ketupat": "https://id.wikipedia.org/wiki/Belah_ketupat",
-    "Layang-Layang": "https://id.wikipedia.org/wiki/Layang-layang_(geometri)"
-}
-
-st.markdown(f"📚 [Baca materi lengkap tentang {bangun}]({link_dict[bangun]})")
 
 # Tab Luas dan Keliling
 st.markdown("---")
@@ -300,6 +268,23 @@ with tab2:
         a = st.number_input("Sisi A", min_value=0.0, key="kel_ak")
         b = st.number_input("Sisi B", min_value=0.0, key="kel_bk")
         st.success(f"Keliling: {keliling_layang_layang(a, b)} cm")
+
+# Tampilkan gambar dan link materi
+img = Image.open(gambar_dict[bangun])
+st.image(img.resize((150,150)), caption=f"Gambar {bangun}")
+
+link_dict = {
+    "Persegi": "https://id.wikipedia.org/wiki/Persegi",
+    "Persegi Panjang": "https://id.wikipedia.org/wiki/Persegi_panjang",
+    "Segitiga": "https://id.wikipedia.org/wiki/Segitiga",
+    "Lingkaran": "https://id.wikipedia.org/wiki/Lingkaran",
+    "Jajar Genjang": "https://id.wikipedia.org/wiki/Jajar_genjang",
+    "Trapesium": "https://id.wikipedia.org/wiki/Trapesium_(geometri)",
+    "Belah Ketupat": "https://id.wikipedia.org/wiki/Belah_ketupat",
+    "Layang-Layang": "https://id.wikipedia.org/wiki/Layang-layang_(geometri)"
+}
+
+st.markdown(f"📚 [Baca materi lengkap tentang {bangun}]({link_dict[bangun]})")
 
 # Footer
 st.markdown("---")

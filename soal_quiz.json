@@ -1,57 +1,290 @@
 [
   {
+    "kategori": "Persegi",
+    "soal": "Berapakah luas persegi dengan sisi 3 cm?",
+    "opsi": ["5 cm²", "9 cm²", "13 cm²", "9 cm²"],
+    "jawaban": "9 cm²",
+    "pembahasan": "Luas persegi = sisi × sisi = 3 × 3 = 9 cm²."
+  },
+  {
+    "kategori": "Persegi",
     "soal": "Berapakah luas persegi dengan sisi 4 cm?",
-    "opsi": [
-      "8 cm\u00b2",
-      "12 cm\u00b2",
-      "16 cm\u00b2",
-      "20 cm\u00b2"
-    ],
-    "jawaban": "16 cm\u00b2",
-    "pembahasan": "Luas persegi = sisi \u00d7 sisi = 4 \u00d7 4 = 16 cm\u00b2"
+    "opsi": ["12 cm²", "16 cm²", "20 cm²", "16 cm²"],
+    "jawaban": "16 cm²",
+    "pembahasan": "Luas persegi = sisi × sisi = 4 × 4 = 16 cm²."
   },
   {
-    "soal": "Bangun datar dengan 4 sisi sama panjang adalah ...",
-    "opsi": [
-      "Lingkaran",
-      "Segitiga",
-      "Persegi",
-      "Trapesium"
-    ],
-    "jawaban": "Persegi",
-    "pembahasan": "Persegi memiliki 4 sisi sama panjang dan 4 sudut siku-siku."
+    "kategori": "Persegi",
+    "soal": "Berapakah luas persegi dengan sisi 5 cm?",
+    "opsi": ["21 cm²", "25 cm²", "29 cm²", "15 cm²"],
+    "jawaban": "25 cm²",
+    "pembahasan": "Luas persegi = sisi × sisi = 5 × 5 = 25 cm²."
   },
   {
-    "soal": "Keliling persegi panjang dengan panjang 5 cm dan lebar 3 cm adalah ...",
-    "opsi": [
-      "16 cm",
-      "15 cm",
-      "10 cm",
-      "18 cm"
-    ],
-    "jawaban": "16 cm",
-    "pembahasan": "Keliling = 2 \u00d7 (p + l) = 2 \u00d7 (5 + 3) = 2 \u00d7 8 = 16 cm"
+    "kategori": "Persegi",
+    "soal": "Berapakah luas persegi dengan sisi 6 cm?",
+    "opsi": ["32 cm²", "36 cm²", "40 cm²", "18 cm²"],
+    "jawaban": "36 cm²",
+    "pembahasan": "Luas persegi = sisi × sisi = 6 × 6 = 36 cm²."
   },
   {
-    "soal": "Luas segitiga dengan alas 6 cm dan tinggi 4 cm adalah ...",
-    "opsi": [
-      "12 cm\u00b2",
-      "24 cm\u00b2",
-      "10 cm\u00b2",
-      "20 cm\u00b2"
-    ],
-    "jawaban": "12 cm\u00b2",
-    "pembahasan": "Luas = \u00bd \u00d7 alas \u00d7 tinggi = \u00bd \u00d7 6 \u00d7 4 = 12 cm\u00b2"
+    "kategori": "Persegi",
+    "soal": "Berapakah luas persegi dengan sisi 7 cm?",
+    "opsi": ["45 cm²", "49 cm²", "53 cm²", "21 cm²"],
+    "jawaban": "49 cm²",
+    "pembahasan": "Luas persegi = sisi × sisi = 7 × 7 = 49 cm²."
+  },
+
+  {
+    "kategori": "Persegi Panjang",
+    "soal": "Berapakah luas persegi panjang dengan panjang 4 cm dan lebar 3 cm?",
+    "opsi": ["8 cm²", "12 cm²", "16 cm²", "7 cm²"],
+    "jawaban": "12 cm²",
+    "pembahasan": "Luas = panjang × lebar = 4 × 3 = 12 cm²."
   },
   {
-    "soal": "Bangun datar yang memiliki satu sisi lengkung adalah ...",
-    "opsi": [
-      "Segitiga",
-      "Jajar Genjang",
-      "Lingkaran",
-      "Belah Ketupat"
-    ],
-    "jawaban": "Lingkaran",
-    "pembahasan": "Lingkaran hanya memiliki satu sisi dan bentuknya melengkung."
+    "kategori": "Persegi Panjang",
+    "soal": "Berapakah luas persegi panjang dengan panjang 5 cm dan lebar 4 cm?",
+    "opsi": ["16 cm²", "20 cm²", "24 cm²", "9 cm²"],
+    "jawaban": "20 cm²",
+    "pembahasan": "Luas = panjang × lebar = 5 × 4 = 20 cm²."
+  },
+  {
+    "kategori": "Persegi Panjang",
+    "soal": "Berapakah luas persegi panjang dengan panjang 6 cm dan lebar 5 cm?",
+    "opsi": ["25 cm²", "30 cm²", "35 cm²", "11 cm²"],
+    "jawaban": "30 cm²",
+    "pembahasan": "Luas = panjang × lebar = 6 × 5 = 30 cm²."
+  },
+  {
+    "kategori": "Persegi Panjang",
+    "soal": "Berapakah luas persegi panjang dengan panjang 7 cm dan lebar 6 cm?",
+    "opsi": ["38 cm²", "42 cm²", "46 cm²", "13 cm²"],
+    "jawaban": "42 cm²",
+    "pembahasan": "Luas = panjang × lebar = 7 × 6 = 42 cm²."
+  },
+  {
+    "kategori": "Persegi Panjang",
+    "soal": "Berapakah luas persegi panjang dengan panjang 8 cm dan lebar 7 cm?",
+    "opsi": ["52 cm²", "56 cm²", "60 cm²", "15 cm²"],
+    "jawaban": "56 cm²",
+    "pembahasan": "Luas = panjang × lebar = 8 × 7 = 56 cm²."
+  },
+
+  {
+    "kategori": "Segitiga",
+    "soal": "Berapakah luas segitiga dengan alas 4 cm dan tinggi 3 cm?",
+    "opsi": ["6 cm²", "7 cm²", "9 cm²", "12 cm²"],
+    "jawaban": "6 cm²",
+    "pembahasan": "Luas = ½ × alas × tinggi = ½ × 4 × 3 = 6 cm²."
+  },
+  {
+    "kategori": "Segitiga",
+    "soal": "Berapakah luas segitiga dengan alas 5 cm dan tinggi 4 cm?",
+    "opsi": ["8 cm²", "10 cm²", "12 cm²", "14 cm²"],
+    "jawaban": "10 cm²",
+    "pembahasan": "Luas = ½ × 5 × 4 = 10 cm²."
+  },
+  {
+    "kategori": "Segitiga",
+    "soal": "Berapakah luas segitiga dengan alas 6 cm dan tinggi 5 cm?",
+    "opsi": ["14 cm²", "15 cm²", "16 cm²", "18 cm²"],
+    "jawaban": "15 cm²",
+    "pembahasan": "Luas = ½ × 6 × 5 = 15 cm²."
+  },
+  {
+    "kategori": "Segitiga",
+    "soal": "Berapakah luas segitiga dengan alas 7 cm dan tinggi 6 cm?",
+    "opsi": ["20 cm²", "21 cm²", "22 cm²", "24 cm²"],
+    "jawaban": "21 cm²",
+    "pembahasan": "Luas = ½ × 7 × 6 = 21 cm²."
+  },
+  {
+    "kategori": "Segitiga",
+    "soal": "Berapakah luas segitiga dengan alas 8 cm dan tinggi 7 cm?",
+    "opsi": ["26 cm²", "27 cm²", "28 cm²", "29 cm²"],
+    "jawaban": "28 cm²",
+    "pembahasan": "Luas = ½ × 8 × 7 = 28 cm²."
+  },
+
+  {
+    "kategori": "Lingkaran",
+    "soal": "Berapakah luas lingkaran dengan jari-jari 3 cm? (π ≈ 3.14)",
+    "opsi": ["27.00 cm²", "28.26 cm²", "29.00 cm²", "30.00 cm²"],
+    "jawaban": "28.26 cm²",
+    "pembahasan": "Luas = π × r² = 3.14 × 3 × 3 = 28.26 cm²."
+  },
+  {
+    "kategori": "Lingkaran",
+    "soal": "Berapakah luas lingkaran dengan jari-jari 4 cm?",
+    "opsi": ["48.00 cm²", "50.24 cm²", "52.00 cm²", "54.00 cm²"],
+    "jawaban": "50.24 cm²",
+    "pembahasan": "Luas = π × r² = 3.14 × 4² = 50.24 cm²."
+  },
+
+  {
+    "kategori": "Lingkaran",
+    "soal": "Berapakah luas lingkaran dengan jari-jari 5 cm?",
+    "opsi": ["75.00 cm²", "78.50 cm²", "80.00 cm²", "85.00 cm²"],
+    "jawaban": "78.50 cm²",
+    "pembahasan": "Luas = π × r² = 3.14 × 5 × 5 = 78.50 cm²."
+  },
+  {
+    "kategori": "Lingkaran",
+    "soal": "Berapakah luas lingkaran dengan jari-jari 6 cm?",
+    "opsi": ["110.00 cm²", "113.04 cm²", "115.00 cm²", "120.00 cm²"],
+    "jawaban": "113.04 cm²",
+    "pembahasan": "Luas = π × r² = 3.14 × 6 × 6 = 113.04 cm²."
+  },
+  {
+    "kategori": "Lingkaran",
+    "soal": "Berapakah luas lingkaran dengan jari-jari 7 cm?",
+    "opsi": ["150.00 cm²", "153.86 cm²", "160.00 cm²", "170.00 cm²"],
+    "jawaban": "153.86 cm²",
+    "pembahasan": "Luas = π × r² = 3.14 × 7 × 7 = 153.86 cm²."
+  },
+
+  {
+    "kategori": "Jajar Genjang",
+    "soal": "Berapakah luas jajar genjang dengan alas 4 cm dan tinggi 3 cm?",
+    "opsi": ["10 cm²", "12 cm²", "14 cm²", "16 cm²"],
+    "jawaban": "12 cm²",
+    "pembahasan": "Luas = alas × tinggi = 4 × 3 = 12 cm²."
+  },
+  {
+    "kategori": "Jajar Genjang",
+    "soal": "Berapakah luas jajar genjang dengan alas 5 cm dan tinggi 4 cm?",
+    "opsi": ["18 cm²", "20 cm²", "22 cm²", "24 cm²"],
+    "jawaban": "20 cm²",
+    "pembahasan": "Luas = 5 × 4 = 20 cm²."
+  },
+  {
+    "kategori": "Jajar Genjang",
+    "soal": "Berapakah luas jajar genjang dengan alas 6 cm dan tinggi 5 cm?",
+    "opsi": ["28 cm²", "30 cm²", "32 cm²", "34 cm²"],
+    "jawaban": "30 cm²",
+    "pembahasan": "Luas = 6 × 5 = 30 cm²."
+  },
+  {
+    "kategori": "Jajar Genjang",
+    "soal": "Berapakah luas jajar genjang dengan alas 7 cm dan tinggi 6 cm?",
+    "opsi": ["40 cm²", "42 cm²", "44 cm²", "46 cm²"],
+    "jawaban": "42 cm²",
+    "pembahasan": "Luas = 7 × 6 = 42 cm²."
+  },
+  {
+    "kategori": "Jajar Genjang",
+    "soal": "Berapakah luas jajar genjang dengan alas 8 cm dan tinggi 7 cm?",
+    "opsi": ["54 cm²", "56 cm²", "58 cm²", "60 cm²"],
+    "jawaban": "56 cm²",
+    "pembahasan": "Luas = 8 × 7 = 56 cm²."
+  },
+
+  {
+    "kategori": "Trapesium",
+    "soal": "Berapakah luas trapesium dengan sisi atas 3 cm, sisi bawah 5 cm, dan tinggi 4 cm?",
+    "opsi": ["14 cm²", "16 cm²", "18 cm²", "20 cm²"],
+    "jawaban": "16 cm²",
+    "pembahasan": "Luas = ½ × (3+5) × 4 = 0.5 × 8 × 4 = 16 cm²."
+  },
+  {
+    "kategori": "Trapesium",
+    "soal": "Berapakah luas trapesium dengan sisi atas 4 cm, sisi bawah 6 cm, dan tinggi 5 cm?",
+    "opsi": ["22 cm²", "25 cm²", "30 cm²", "32 cm²"],
+    "jawaban": "25 cm²",
+    "pembahasan": "Luas = ½ × (4+6) × 5 = 0.5 × 10 × 5 = 25 cm²."
+  },
+  {
+    "kategori": "Trapesium",
+    "soal": "Berapakah luas trapesium dengan sisi atas 5 cm, sisi bawah 7 cm, dan tinggi 6 cm?",
+    "opsi": ["34 cm²", "36 cm²", "40 cm²", "42 cm²"],
+    "jawaban": "36 cm²",
+    "pembahasan": "Luas = ½ × (5+7) × 6 = 0.5 × 12 × 6 = 36 cm²."
+  },
+  {
+    "kategori": "Trapesium",
+    "soal": "Berapakah luas trapesium dengan sisi atas 6 cm, sisi bawah 8 cm, dan tinggi 7 cm?",
+    "opsi": ["45 cm²", "49 cm²", "52 cm²", "54 cm²"],
+    "jawaban": "49 cm²",
+    "pembahasan": "Luas = ½ × (6+8) × 7 = 0.5 × 14 × 7 = 49 cm²."
+  },
+  {
+    "kategori": "Trapesium",
+    "soal": "Berapakah luas trapesium dengan sisi atas 7 cm, sisi bawah 9 cm, dan tinggi 8 cm?",
+    "opsi": ["60 cm²", "64 cm²", "66 cm²", "68 cm²"],
+    "jawaban": "64 cm²",
+    "pembahasan": "Luas = ½ × (7+9) × 8 = 0.5 × 16 × 8 = 64 cm²."
+  },
+
+  {
+    "kategori": "Belah Ketupat",
+    "soal": "Berapakah luas belah ketupat dengan diagonal 4 cm dan 6 cm?",
+    "opsi": ["10 cm²", "12 cm²", "14 cm²", "16 cm²"],
+    "jawaban": "12 cm²",
+    "pembahasan": "Luas = ½ × 4 × 6 = 12 cm²."
+  },
+  {
+    "kategori": "Belah Ketupat",
+    "soal": "Berapakah luas belah ketupat dengan diagonal 5 cm dan 7 cm?",
+    "opsi": ["16 cm²", "17.5 cm²", "18 cm²", "20 cm²"],
+    "jawaban": "17.5 cm²",
+    "pembahasan": "Luas = ½ × 5 × 7 = 17.5 cm²."
+  },
+  {
+    "kategori": "Belah Ketupat",
+    "soal": "Berapakah luas belah ketupat dengan diagonal 6 cm dan 8 cm?",
+    "opsi": ["22 cm²", "24 cm²", "26 cm²", "28 cm²"],
+    "jawaban": "24 cm²",
+    "pembahasan": "Luas = ½ × 6 × 8 = 24 cm²."
+  },
+  {
+    "kategori": "Belah Ketupat",
+    "soal": "Berapakah luas belah ketupat dengan diagonal 7 cm dan 9 cm?",
+    "opsi": ["30 cm²", "31.5 cm²", "33 cm²", "35 cm²"],
+    "jawaban": "31.5 cm²",
+    "pembahasan": "Luas = ½ × 7 × 9 = 31.5 cm²."
+  },
+  {
+    "kategori": "Belah Ketupat",
+    "soal": "Berapakah luas belah ketupat dengan diagonal 8 cm dan 10 cm?",
+    "opsi": ["38 cm²", "39 cm²", "40 cm²", "41 cm²"],
+    "jawaban": "40 cm²",
+    "pembahasan": "Luas = ½ × 8 × 10 = 40 cm²."
+  },
+
+  {
+    "kategori": "Layang-Layang",
+    "soal": "Berapakah luas layang-layang dengan diagonal 5 cm dan 3 cm?",
+    "opsi": ["7.5 cm²", "8 cm²", "8.5 cm²", "9 cm²"],
+    "jawaban": "7.5 cm²",
+    "pembahasan": "Luas = ½ × 5 × 3 = 7.5 cm²."
+  },
+  {
+    "kategori": "Layang-Layang",
+    "soal": "Berapakah luas layang-layang dengan diagonal 6 cm dan 4 cm?",
+    "opsi": ["10 cm²", "11 cm²", "12 cm²", "13 cm²"],
+    "jawaban": "12 cm²",
+    "pembahasan": "Luas = ½ × 6 × 4 = 12 cm²."
+  },
+  {
+    "kategori": "Layang-Layang",
+    "soal": "Berapakah luas layang-layang dengan diagonal 7 cm dan 5 cm?",
+    "opsi": ["15 cm²", "17.5 cm²", "19 cm²", "21 cm²"],
+    "jawaban": "17.5 cm²",
+    "pembahasan": "Luas = ½ × 7 × 5 = 17.5 cm²."
+  },
+  {
+    "kategori": "Layang-Layang",
+    "soal": "Berapakah luas layang-layang dengan diagonal 8 cm dan 6 cm?",
+    "opsi": ["22 cm²", "23 cm²", "24 cm²", "25 cm²"],
+    "jawaban": "24 cm²",
+    "pembahasan": "Luas = ½ × 8 × 6 = 24 cm²."
+  },
+  {
+    "kategori": "Layang-Layang",
+    "soal": "Berapakah luas layang-layang dengan diagonal 9 cm dan 7 cm?",
+    "opsi": ["30 cm²", "31.5 cm²", "32 cm²", "33 cm²"],
+    "jawaban": "31.5 cm²",
+    "pembahasan": "Luas = ½ × 9 × 7 = 31.5 cm²."
   }
 ]

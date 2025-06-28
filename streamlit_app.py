@@ -101,7 +101,7 @@ def luas_layang_layang(d1, d2): return 0.5 * d1 * d2
 def keliling_layang_layang(a, b): return 2 * (a + b)
 
 # Sidebar bangun
-st.sidebar.markdown("<h4 style='margin-bottom:10px;'>📐 Pilih Bangun Datar</h4>", unsafe_allow_html=True)
+st.sidebar.markdown("<h3 style='margin-bottom:10px;'>📐 Pilih Bangun Datar</h3>", unsafe_allow_html=True)
 bangun = st.sidebar.selectbox("🔷 Bangun Datar", list(gambar_dict.keys()))
 
 # Tab luas dan keliling

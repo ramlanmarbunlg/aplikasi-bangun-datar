@@ -147,7 +147,7 @@ if st.session_state.mode_quiz:
             go.Pie(
                 values=[sisa_waktu, MAX_WAKTU - sisa_waktu],
                 labels=["Sisa", ""],
-                hole=0.5,
+                hole=0.7,
                 marker_colors=["#FF6347", "#eee"],
                 textinfo="none",
                 direction="clockwise",

@@ -41,7 +41,7 @@ init_state()
 # ========== HALAMAN SELAMAT DATANG ==========
 if not st.session_state.mulai_main:
     st.markdown(f"<h1 style='text-align:center; color:{st.session_state.tema_anak['text']}'>✨ Selamat Datang Anak Hebat! ✨</h1>", unsafe_allow_html=True)
-    st.image("images/anak.png", width=200)
+    st.image("images/karakter1.png", width=200)
     st.markdown("<p style='text-align:center; font-size:20px;'>Ayo belajar sambil bermain dengan bentuk-bentuk bangun datar!</p>", unsafe_allow_html=True)
 
     # Progress loading

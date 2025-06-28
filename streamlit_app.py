@@ -322,7 +322,7 @@ st.markdown(f"📚 [Baca materi lengkap tentang {bangun}]({link_dict[bangun]})")
         st.session_state.quiz_jawaban = {}
         st.session_state.start_time = time.time()
         st.rerun()
-        st.stop()
+    st.stop()
 
 # Footer
 st.markdown("---")

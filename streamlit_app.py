@@ -182,6 +182,10 @@ if st.session_state.mode_quiz:
             st.session_state.start_time = time.time()
             st.rerun()
 
+         # Paksa update per detik agar countdown jalan
+        time.sleep(1)
+        st.rerun()
+    
         st.stop()
 
     # Langkah 3: Evaluasi

@@ -146,7 +146,7 @@ if st.session_state.mode_quiz:
 
         # Timer dan countdown
         elapsed = int(time.time() - st.session_state.start_time)
-        sisa_waktu = max(0, 20 - elapsed)
+        sisa_waktu = max(0, 15 - elapsed)
 
         # Tambahkan countdown visual dengan plotly
         fig = go.Figure(go.Indicator(
@@ -154,13 +154,12 @@ if st.session_state.mode_quiz:
             value=sisa_waktu,
             title={'text': "⏳ Sisa Waktu (Detik)"},
             gauge={
-                'axis': {'range': [0, 20]},
+                'axis': {'range': [0, 15]},
                 'bar': {'color': "orange"},
                 'steps': [
                     {'range': [0, 5], 'color': 'red'},
                     {'range': [5, 10], 'color': 'yellow'},
-                    {'range': [10, 15], 'color': 'green'},
-                    {'range': [15, 20], 'color': 'lightgreen'}
+                    {'range': [10, 15], 'color': 'green'}
                 ],
             }
         ))

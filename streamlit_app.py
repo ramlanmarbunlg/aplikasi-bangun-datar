@@ -139,9 +139,9 @@ if st.session_state.mode_quiz:
         soal = soal_data[indeks]
         st.header(f"🎓 Quiz: {soal['kategori']} - Soal {indeks + 1} dari {total_soal}")
 
-    # Progress bar visual soal
+    # Progress bar visual
     progress = (indeks + 1) / total_soal
-    st.progress(progress)
+    st.progress(min(progress, 1.0))
 
     st.subheader(soal["soal"])
 

@@ -17,11 +17,23 @@ A simple Streamlit app template for you to modify!
    ```
    $ streamlit run streamlit_app.py
    ```
-3. ✅ **Fitur Versi 1**
+3. ✅ **Fitur Versi 1 (streamlit-appv1.py)**
 - Sidebar interaktif untuk navigasi jenis bangun dan operasi.
 - Input dinamis berdasarkan bentuk dan jenis operasi (luas / keliling).
 - Perhitungan otomatis dan hasil langsung ditampilkan.
 
+4. ✅ **Fitur Versi 2 (streamlit-appv2.py)**
+- 🎉 Halaman pembuka interaktif
+- 🎮 Tombol “Klik untuk Mulai Bermain” dengan loading GIF berjalan
+- 🧠 Mode anak-anak otomatis aktif + suara & warna ceria
+- 🔊 Audio otomatis (selama browser mengizinkan)
+- 📐 Sidebar navigasi + tombol kembali
+- 📏 Tab luas & keliling
+- 🖼️ Gambar ilustrasi tiap bangun ukuran 150x150
+- 📚 Link materi bacaan di bawah gambar
+- 🎨 Tema warna ceria acak
+- 🌀 Animasi loading gif berjalan sempurna
+  
 🤝 **Connect with Me**
 ---
 - 📺 YouTube: Ramlan Marbun (https://www.youtube.com/@RamlanMarbun)

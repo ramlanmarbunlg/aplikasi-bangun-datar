@@ -120,7 +120,7 @@ if st.session_state.mode_quiz:
             st.session_state.quiz_jawaban[indeks] = jawaban
             st.session_state.quiz_index += 1
             st.session_state.start_time = time.time()
-           st.rerun()
+            st.rerun()
 
         if st.button("✅ Jawab dan Lanjut"):
             st.session_state.quiz_jawaban[indeks] = jawaban

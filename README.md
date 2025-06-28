@@ -36,11 +36,12 @@ A simple Streamlit app template for you to modify!
 
 5. ✅ **Fitur Versi 3 (streamlit-appv.py)**
 - 🎉 Penambahan Fitur QUIZ/EVALUASI, PEMBAHASAN
-- 📌 Tombol Mode Evaluasi di sidebar
-- ❓ Quiz interaktif dengan 5 soal pilihan ganda acak
+- 📌 Tombol Mode Evaluasi dan Mode Kalkulasi di sidebar
+- ❓ Quiz interaktif dengan 5 soal pilihan ganda acak pada masing-masing kategori bangun datar
 - 📝 Skor akhir dan pesan semangat
 - ✅ Mode ulangi quiz
 - 🌈 Otomatis pakai gaya anak-anak (warna + emoji)
+- 📝 Timer & Countdown pada setiap soal
   
 🤝 **Connect with Me**
 ---

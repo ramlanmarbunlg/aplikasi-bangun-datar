@@ -1,4 +1,5 @@
 import streamlit as st
+import plotly.graph_objects as go
 import math
 from PIL import Image
 import time
@@ -133,24 +134,56 @@ if st.session_state.mode_quiz:
         soal = soal_data[indeks]
         st.header(f"🎓 Quiz: {soal['kategori']} - Soal {indeks + 1} dari {total_soal}")
 
-        # Progress bar visual
-        progress = (indeks + 1) / total_soal
-        st.progress(progress)
+        # === Progress bar visual ===
+        st.progress((indeks + 1) / total_soal)
+
+        # === Timer countdown 20 detik ===
+        MAX_WAKTU = 20
+        elapsed = int(time.time() - st.session_state.start_time)
+        sisa_waktu = max(0, MAX_WAKTU - elapsed)
+
+        # Pie chart countdown
+        fig = go.Figure(data=[
+            go.Pie(
+                values=[sisa_waktu, MAX_WAKTU - sisa_waktu],
+                labels=["Sisa", ""],
+                hole=0.7,
+                marker_colors=["#FF6347", "#eee"],
+                textinfo="none",
+                direction="clockwise",
+                sort=False
+            )
+        ])
+        fig.update_layout(
+            showlegend=False,
+            margin=dict(t=0, b=0, l=0, r=0),
+            width=200,
+            height=200,
+            annotations=[
+                dict(text=f"{sisa_waktu}s", showarrow=False, font_size=20)
+            ]
+        )
+
+        st.empty().plotly_chart(fig, use_container_width=True)
+
+        # === Soal dan Opsi ===
         st.subheader(soal["soal"])
 
-        jawaban = st.radio("Pilih jawaban:", soal["opsi"], key=f"soal{indeks}")
+        disable_opsi = sisa_waktu <= 0
+        jawaban = st.radio("Pilih jawaban:", soal["opsi"], key=f"soal{indeks}", disabled=disable_opsi)
 
-        elapsed = int(time.time() - st.session_state.start_time)
-        sisa_waktu = max(0, 15 - elapsed)
-        st.info(f"⏳ Sisa waktu: {sisa_waktu} detik")
-
+        # Jika waktu habis otomatis lanjut
         if sisa_waktu == 0:
-            st.session_state.quiz_jawaban[indeks] = jawaban
-            st.session_state.quiz_index += 1
-            st.session_state.start_time = time.time()
-            st.rerun()
+            st.warning("❌ Waktu habis! Soal berikutnya akan dimulai...")
+            if indeks not in st.session_state.quiz_jawaban:
+                st.session_state.quiz_jawaban[indeks] = jawaban
+                time.sleep(2)
+                st.session_state.quiz_index += 1
+                st.session_state.start_time = time.time()
+                st.rerun()
 
-        if st.button("✅ Jawab dan Lanjut"):
+        # Tombol jawab jika belum habis
+        if not disable_opsi and st.button("✅ Jawab dan Lanjut"):
             st.session_state.quiz_jawaban[indeks] = jawaban
             st.session_state.quiz_index += 1
             st.session_state.start_time = time.time()

@@ -148,23 +148,21 @@ if st.session_state.mode_quiz:
         elapsed = int(time.time() - st.session_state.start_time)
         sisa_waktu = max(0, 15 - elapsed)
 
-        # Tambahkan countdown visual dengan plotly
-        fig = go.Figure(go.Indicator(
-            mode="gauge+number",
-            value=sisa_waktu,
-            title={'text': "⏳ Sisa Waktu (Detik)"},
-            gauge={
-                'axis': {'range': [0, 15]},
-                'bar': {'color': "orange"},
-                'steps': [
-                    {'range': [0, 5], 'color': 'red'},
-                    {'range': [5, 10], 'color': 'yellow'},
-                    {'range': [10, 15], 'color': 'green'}
-                ],
-            }
-        ))
-        fig.update_layout(height=250, width=400, margin=dict(t=30, b=10, l=10, r=10))
-        st.plotly_chart(fig)
+        # Warna dinamis berdasarkan sisa waktu
+        warna = "lightgreen" if sisa_waktu > 10 else "orange" if sisa_waktu > 5 else "red"
+
+        # Countdown horizontal minimalis di kanan atas
+        countdown_html = f"""
+        <div style="position: absolute; top: 100px; right: 20px; width: 150px;">
+            <div style="height: 18px; background-color: #eee; border-radius: 10px; overflow: hidden; box-shadow: 1px 1px 3px rgba(0,0,0,0.1);">
+                <div style="width: {(sisa_waktu / 15) * 100}%; background-color: {warna}; height: 100%;
+                            text-align: center; color: white; font-size: 13px; font-weight: bold;">
+                    ⏳ {sisa_waktu} detik
+                </div>
+            </div>
+        </div>
+        """
+        st.markdown(countdown_html, unsafe_allow_html=True)
 
         jawaban_disabled = sisa_waktu == 0
         jawaban = st.radio("Pilih jawaban:", soal["opsi"], key=f"soal{indeks}", disabled=jawaban_disabled)

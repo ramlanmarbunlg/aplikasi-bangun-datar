@@ -35,8 +35,8 @@ if "quiz_jawaban" not in st.session_state:
     st.session_state.quiz_jawaban = {}
 if "start_time" not in st.session_state:
     st.session_state.start_time = time.time()
-if "kategori_quiz" not in st.session_state:
-    st.session_state.kategori_quiz = None
+if "quiz_kategori" not in st.session_state:
+    st.session_state.quiz_kategori = None
 if "high_score" not in st.session_state:
     st.session_state.high_score = {}
 
@@ -111,7 +111,7 @@ if st.session_state.mode_quiz:
     kategori_list = sorted(list(set([s["kategori"] for s in all_soal])))
 
     # Langkah 1: Pilih kategori jika belum
-    if not st.session_state.kategori_quiz:
+    if not st.session_state.quiz_kategori:
         st.header("📚 Pilih Kategori Quiz")
         kategori = st.selectbox("📐 Pilih kategori bangun datar:", kategori_list)
 

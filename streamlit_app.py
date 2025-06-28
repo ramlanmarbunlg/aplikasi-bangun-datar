@@ -135,71 +135,70 @@ if st.session_state.mode_quiz:
     indeks = st.session_state.quiz_index
 
     # Soal masih ada
-  import plotly.graph_objects as go
-
-if indeks < total_soal:
-    soal = soal_data[indeks]
-    st.header(f"🎓 Quiz: {soal['kategori']} - Soal {indeks + 1} dari {total_soal}")
-
-    # Progress bar visual quiz
-    progress = (indeks + 1) / total_soal
-    st.progress(progress)
-
-    st.subheader(soal["soal"])
-
-    # Sisa waktu dihitung dari time.time() dan disimpan
-    if "start_time" not in st.session_state:
-        st.session_state.start_time = time.time()
-
-    elapsed = int(time.time() - st.session_state.start_time)
-    sisa_waktu = max(0, 15 - elapsed)
-
-    # Plotly countdown circle
-    fig = go.Figure(go.Indicator(
-        mode="gauge+number",
-        value=sisa_waktu,
-        domain={'x': [0, 1], 'y': [0, 1]},
-        title={'text': "⏳ Sisa Detik"},
-        gauge={
-            'axis': {'range': [0, 15]},
-            'bar': {'color': "orange"},
-            'steps': [
-                {'range': [0, 5], 'color': "red"},
-                {'range': [5, 10], 'color': "yellow"},
-                {'range': [10, 15], 'color': "lightgreen"},
-            ],
-        }
-    ))
-
-    # Tampilkan countdown animasi lingkaran
-    st.plotly_chart(fig, use_container_width=True)
-
-    # Radio pilihan jawaban (disable jika waktu habis)
-    jawaban = st.radio("Pilih jawaban:", soal["opsi"],
-                       key=f"soal{indeks}",
-                       disabled=sisa_waktu == 0)
-
-    # Jika waktu habis, lanjut otomatis
-    if sisa_waktu == 0:
-        st.warning("⏰ Waktu habis! Soal akan lanjut...")
-        if indeks not in st.session_state.quiz_jawaban:
+    if indeks < total_soal:
+        soal = soal_data[indeks]
+        st.header(f"🎓 Quiz: {soal['kategori']} - Soal {indeks + 1} dari {total_soal}")
+    
+        # Progress bar visual quiz
+        progress = (indeks + 1) / total_soal
+        st.progress(progress)
+    
+        st.subheader(soal["soal"])
+    
+        # Sisa waktu dihitung dari time.time() dan disimpan
+        if "start_time" not in st.session_state:
+            st.session_state.start_time = time.time()
+    
+        elapsed = int(time.time() - st.session_state.start_time)
+        sisa_waktu = max(0, 15 - elapsed)
+    
+        # Plotly countdown circle
+        fig = go.Figure(go.Indicator(
+            mode="gauge+number",
+            value=sisa_waktu,
+            domain={'x': [0, 1], 'y': [0, 1]},
+            title={'text': "⏳ Sisa Detik"},
+            gauge={
+                'axis': {'range': [0, 15]},
+                'bar': {'color': "orange"},
+                'steps': [
+                    {'range': [0, 5], 'color': "red"},
+                    {'range': [5, 10], 'color': "yellow"},
+                    {'range': [10, 15], 'color': "lightgreen"},
+                ],
+            }
+        ))
+    
+        # Tampilkan countdown animasi lingkaran
+        st.plotly_chart(fig, use_container_width=True)
+    
+        # Radio pilihan jawaban (disable jika waktu habis)
+        jawaban = st.radio("Pilih jawaban:", soal["opsi"],
+                           key=f"soal{indeks}",
+                           disabled=sisa_waktu == 0)
+    
+        # Jika waktu habis, lanjut otomatis
+        if sisa_waktu == 0:
+            st.warning("⏰ Waktu habis! Soal akan lanjut...")
+            if indeks not in st.session_state.quiz_jawaban:
+                st.session_state.quiz_jawaban[indeks] = jawaban
+                st.session_state.quiz_index += 1
+                st.session_state.start_time = time.time()
+                st.experimental_rerun()
+        else:
+            # Delay 1 detik dan rerun (agar animasi countdown hidup)
+            time.sleep(1)
+            st.experimental_rerun()
+    
+        # Tombol lanjut jika belum habis
+        if sisa_waktu > 0 and st.button("✅ Jawab dan Lanjut"):
             st.session_state.quiz_jawaban[indeks] = jawaban
             st.session_state.quiz_index += 1
             st.session_state.start_time = time.time()
-            st.experimental_rerun()
-    else:
-        # Delay 1 detik dan rerun (agar animasi countdown hidup)
-        time.sleep(1)
-        st.experimental_rerun()
-
-    # Tombol lanjut jika belum habis
-    if sisa_waktu > 0 and st.button("✅ Jawab dan Lanjut"):
-        st.session_state.quiz_jawaban[indeks] = jawaban
-        st.session_state.quiz_index += 1
-        st.session_state.start_time = time.time()
-        st.rerun()
-
-    st.stop()
+            st.rerun()
+    
+        st.stop()
+        
     # Langkah 3: Evaluasi
     st.subheader("📊 Hasil Evaluasi")
     skor = 0

@@ -134,34 +134,24 @@ if st.session_state.mode_quiz:
     total_soal = len(soal_data)
     indeks = st.session_state.quiz_index
 
-    # Soal masih ada
-    if indeks < total_soal:
-        soal = soal_data[indeks]
-        st.header(f"🎓 Quiz: {soal['kategori']} - Soal {indeks + 1} dari {total_soal}")
+# Jika soal masih tersedia
+if indeks < total_soal:
+    soal = soal_data[indeks]
+    st.header(f"🎓 Quiz: {soal['kategori']} - Soal {indeks + 1} dari {total_soal}")
 
-    # Progress bar visual soal
-    progress = (indeks + 1) / total_soal
+    # Progress bar
+    progress = min((indeks + 1) / total_soal, 1.0)
     st.progress(progress)
 
     st.subheader(soal["soal"])
 
-    # Inisialisasi waktu awal jika belum
+    # Timer dan countdown
     if "start_time" not in st.session_state:
         st.session_state.start_time = time.time()
-
-    # Hitung waktu tersisa
     elapsed = int(time.time() - st.session_state.start_time)
     sisa_waktu = max(0, 15 - elapsed)
 
-    # Warna dinamis countdown bar
-    if sisa_waktu > 10:
-        warna = "lightgreen"
-    elif sisa_waktu > 5:
-        warna = "orange"
-    else:
-        warna = "red"
-
-    # Countdown horizontal minimalis
+    warna = "lightgreen" if sisa_waktu > 10 else "orange" if sisa_waktu > 5 else "red"
     countdown_placeholder = st.empty()
     countdown_placeholder.markdown(
         f"""
@@ -175,29 +165,24 @@ if st.session_state.mode_quiz:
         unsafe_allow_html=True
     )
 
-    # Jika waktu habis, otomatis lanjut
     jawaban_disabled = sisa_waktu == 0
     jawaban = st.radio("Pilih jawaban:", soal["opsi"], key=f"soal{indeks}", disabled=jawaban_disabled)
 
     if sisa_waktu == 0:
         st.warning("⏰ Waktu habis!")
-        # Simpan jawaban yang dipilih atau kosong jika tidak memilih
         st.session_state.quiz_jawaban[indeks] = st.session_state.get(f"soal{indeks}", "(Lewat)")
         st.session_state.quiz_index += 1
         st.session_state.start_time = time.time()
         st.rerun()
 
-    # Tombol untuk menjawab manual sebelum waktu habis
     if st.button("✅ Jawab dan Lanjut") and not jawaban_disabled:
         st.session_state.quiz_jawaban[indeks] = jawaban
         st.session_state.quiz_index += 1
         st.session_state.start_time = time.time()
         st.rerun()
 
-    # Paksa update halaman tiap detik agar countdown hidup
     time.sleep(1)
     st.rerun()
-
     st.stop()
 
     # Langkah 3: Evaluasi

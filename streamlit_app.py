@@ -111,7 +111,7 @@ if st.session_state.mode_quiz:
     kategori_list = sorted(list(set([s["kategori"] for s in all_soal])))
 
     # Langkah 1: Pilih kategori jika belum
-    if not st.session_state.quiz_kategori:
+    if not st.session_state.kategori_quiz:
         st.header("📚 Pilih Kategori Quiz")
         kategori = st.selectbox("📐 Pilih kategori bangun datar:", kategori_list)
 

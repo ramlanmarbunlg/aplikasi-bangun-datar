@@ -139,94 +139,91 @@ if st.session_state.mode_quiz:
         soal = soal_data[indeks]
         st.header(f"🎓 Quiz: {soal['kategori']} - Soal {indeks + 1} dari {total_soal}")
 
-    # Progress bar visual
-    progress = (indeks + 1) / total_soal
-    st.progress(progress)
-    st.subheader(soal["soal"])
+        # Progress bar visual
+        progress = (indeks + 1) / total_soal
+        st.progress(progress)
+        st.subheader(soal["soal"])
 
-    # Timer dan countdown
-    if "start_time" not in st.session_state:
-        st.session_state.start_time = time.time()
-    elapsed = int(time.time() - st.session_state.start_time)
-    sisa_waktu = max(0, 15 - elapsed)
+        # Timer dan countdown
+        elapsed = int(time.time() - st.session_state.start_time)
+        sisa_waktu = max(0, 15 - elapsed)
 
-    # Countdown minimalis horizontal (HTML)
-    warna = "lightgreen" if sisa_waktu > 10 else "orange" if sisa_waktu > 5 else "red"
-    countdown_placeholder = st.empty()
-    countdown_placeholder.markdown(
-        f"""
-        <div style="height: 18px; background-color: #eee; border-radius: 10px; overflow: hidden;">
-            <div style="width: {(sisa_waktu / 15) * 100}%; background-color: {warna}; height: 100%; 
-                        text-align: center; color: white; font-size: 14px; font-weight: bold;">
-                ⏳ {sisa_waktu} detik
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+        # Tambahkan countdown visual dengan plotly
+        fig = go.Figure(go.Indicator(
+            mode="gauge+number",
+            value=sisa_waktu,
+            title={'text': "⏳ Sisa Waktu (Detik)"},
+            gauge={
+                'axis': {'range': [0, 15]},
+                'bar': {'color': "orange"},
+                'steps': [
+                    {'range': [0, 5], 'color': 'red'},
+                    {'range': [5, 10], 'color': 'yellow'},
+                    {'range': [10, 15], 'color': 'green'}
+                ],
+            }
+        ))
+        fig.update_layout(height=250, width=400, margin=dict(t=30, b=10, l=10, r=10))
+        st.plotly_chart(fig)
 
-    # Jawaban
-    jawaban_disabled = sisa_waktu == 0
-    jawaban = st.radio("Pilih jawaban:", soal["opsi"], key=f"soal{indeks}", disabled=jawaban_disabled)
+        jawaban_disabled = sisa_waktu == 0
+        jawaban = st.radio("Pilih jawaban:", soal["opsi"], key=f"soal{indeks}", disabled=jawaban_disabled)
 
-    # Aksi jika waktu habis
-    if sisa_waktu == 0:
-        st.warning("⏰ Waktu habis!")
-        st.session_state.quiz_jawaban[indeks] = st.session_state.get(f"soal{indeks}", "(Lewat)")
-        st.session_state.quiz_index += 1
-        st.session_state.start_time = time.time()
+        if sisa_waktu == 0:
+            st.warning("⏰ Waktu habis!")
+            st.session_state.quiz_jawaban[indeks] = jawaban
+            st.session_state.quiz_index += 1
+            st.session_state.start_time = time.time()
+            st.rerun()
+
+        if st.button("✅ Jawab dan Lanjut") and not jawaban_disabled:
+            st.session_state.quiz_jawaban[indeks] = jawaban
+            st.session_state.quiz_index += 1
+            st.session_state.start_time = time.time()
+            st.rerun()
+
+        st.stop()
+
+    # Langkah 3: Evaluasi
+    st.subheader("📊 Hasil Evaluasi")
+    skor = 0
+    for i, soal in enumerate(soal_data):
+        user_jawaban = st.session_state.quiz_jawaban.get(i, "(Belum Dijawab)")
+        benar = user_jawaban == soal["jawaban"]
+        ikon = "✅" if benar else "❌"
+        warna = "green" if benar else "red"
+        if benar:
+            skor += 1
+        st.markdown(f"**Soal {i+1}: {ikon}**")
+        st.markdown(f"{soal['soal']}")
+        st.markdown(f"**Jawabanmu:** {user_jawaban}")
+        st.markdown(f"<span style='color:{warna};'>**Jawaban benar:** {soal['jawaban']}</span>", unsafe_allow_html=True)
+        st.markdown(f"📝 *Pembahasan:* {soal['pembahasan']}")
+        st.markdown("---")
+
+    # Setelah menampilkan skor akhir
+    st.success(f"🎉 Skor kamu: {skor} dari {total_soal}")
+    st.session_state.show_balloons = True
+
+    # Tombol reset quiz
+    if st.button("🔁 Ulangi Quiz"):
+        for key in list(st.session_state.keys()):
+            if key.startswith("soal") or key.startswith("quiz"):
+                del st.session_state[key]
+        st.session_state.mode_quiz = True
         st.rerun()
 
-    # Aksi jika dijawab manual
-    if st.button("✅ Jawab dan Lanjut") and not jawaban_disabled:
-        st.session_state.quiz_jawaban[indeks] = jawaban
-        st.session_state.quiz_index += 1
-        st.session_state.start_time = time.time()
+    # Tombol kembali ke kalkulasi
+    if st.button("📐 Kembali ke Mode Kalkulasi"):
+        for key in list(st.session_state.keys()):
+            if key.startswith("soal") or key.startswith("quiz"):
+                del st.session_state[key]
+        st.session_state.mode_quiz = False
+        st.session_state.quiz_kategori = None
         st.rerun()
-
-    # Paksa update per detik agar countdown jalan
-    time.sleep(1)
-    st.rerun()
 
     st.stop()
 
-# Evaluasi setelah semua soal selesai
-st.subheader("📊 Hasil Evaluasi")
-skor = 0
-for i, soal in enumerate(soal_data):
-    user_jawaban = st.session_state.quiz_jawaban.get(i, "(Belum Dijawab)")
-    benar = user_jawaban == soal["jawaban"]
-    ikon = "✅" if benar else "❌"
-    warna = "green" if benar else "red"
-    if benar:
-        skor += 1
-    st.markdown(f"**Soal {i+1}: {ikon}**")
-    st.markdown(f"{soal['soal']}")
-    st.markdown(f"**Jawabanmu:** {user_jawaban}")
-    st.markdown(f"<span style='color:{warna};'>**Jawaban benar:** {soal['jawaban']}</span>", unsafe_allow_html=True)
-    st.markdown(f"📝 *Pembahasan:* {soal['pembahasan']}")
-    st.markdown("---")
-
-st.success(f"🎉 Skor kamu: {skor} dari {total_soal}")
-st.session_state.show_balloons = True
-
-# Tombol reset quiz
-if st.button("🔁 Ulangi Quiz"):
-    for key in list(st.session_state.keys()):
-        if key.startswith("soal") or key.startswith("quiz"):
-            del st.session_state[key]
-    st.session_state.mode_quiz = True
-    st.rerun()
-
-# Tombol kembali ke kalkulasi
-if st.button("📐 Kembali ke Mode Kalkulasi"):
-    for key in list(st.session_state.keys()):
-        if key.startswith("soal") or key.startswith("quiz"):
-            del st.session_state[key]
-    st.session_state.mode_quiz = False
-    st.session_state.quiz_kategori = None
-    st.rerun()
-st.stop()
 # ============= MODE KALKULASI BANGUN DATAR=============
 # Gambar ilustrasi tiap bangun
 gambar_dict = {

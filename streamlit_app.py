@@ -30,10 +30,12 @@ if "tema_anak" not in st.session_state:
 if st.session_state.loading_page:
     st.markdown("<h4 style='text-align:center;'>⏳ Memuat permainan seru untukmu...</h4>", unsafe_allow_html=True)
     progress_bar = st.progress(0)
+    percent_text = st.empty()
 
     for i in range(101):
-        time.sleep(0.05)  # total sekitar 5 detik
+        time.sleep(0.05)  # ~5 detik
         progress_bar.progress(i)
+        percent_text.markdown(f"<h5 style='text-align:center;'>{i} %</h5>", unsafe_allow_html=True)
 
     st.session_state.loading_page = False
     st.session_state.mulai_main = True

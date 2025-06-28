@@ -157,7 +157,7 @@ if st.session_state.mode_quiz:
             mode="gauge+number",
             value=sisa_waktu,
             domain={'x': [0, 1], 'y': [0, 1]},
-            title={'text': "⏳ Sisa Detik"},
+            title={'text': "⏳ Sisa Waktu (Detik)"},
             gauge={
                 'axis': {'range': [0, 20]},
                 'bar': {'color': "orange"},

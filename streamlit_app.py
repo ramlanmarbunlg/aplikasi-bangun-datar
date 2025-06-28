@@ -157,8 +157,8 @@ if st.session_state.mode_quiz:
         fig.update_layout(
             showlegend=False,
             margin=dict(t=0, b=0, l=0, r=0),
-            width=75,
-            height=75,
+            width=50,
+            height=50,
             annotations=[
                 dict(text=f"{sisa_waktu}s", showarrow=False, font_size=20)
             ]

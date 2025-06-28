@@ -178,8 +178,8 @@ if st.session_state.mode_quiz:
 
     st.stop()
 else:
-    # Tambahkan ulang ini sebelum evaluasi
-    soal_data = [s for s in all_soal if s["kategori"] == st.session_state.quiz_kategori]
+
+        soal_data = [s for s in all_soal if s["kategori"] == st.session_state.quiz_kategori]
     # Evaluasi akhir quiz (soal sudah selesai)
     st.subheader("📊 Hasil Evaluasi")
     skor = 0
@@ -214,6 +214,7 @@ else:
         st.session_state.mode_quiz = False
         st.session_state.quiz_kategori = None
         st.rerun()
+    st.stop()
 
 # ============= MODE KALKULASI BANGUN DATAR=============
 # Gambar ilustrasi tiap bangun

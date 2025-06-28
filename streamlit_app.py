@@ -39,7 +39,7 @@ if "start_time" not in st.session_state:
 # Jika sedang di halaman loading
 if st.session_state.loading_page:
     st.markdown("<h4 style='text-align:center;'>⏳ Memuat permainan seru untukmu...</h4>", unsafe_allow_html=True)
-    progress_bar = st.progress(50)
+    progress_bar = st.progress(0)
     percent_text = st.empty()
     for i in range(101):
         time.sleep(0.05)
@@ -84,14 +84,14 @@ if st.session_state.mode_anak:
 # Sidebar
 st.sidebar.markdown("<h4 style='margin-bottom:10px;'>📐 Pilih Bangun Datar</h4>", unsafe_allow_html=True)
 
-if st.sidebar.button("🎯 Mode Evaluasi/Quiz"):
+if st.sidebar.button("🎯 Mode Quiz"):
     st.session_state.mode_quiz = True
     st.session_state.quiz_index = 0
     st.session_state.quiz_jawaban = {}
     st.session_state.start_time = time.time()
     st.rerun()
 
-if st.sidebar.button("🔙 Kembali ke Halaman Awal"):
+if st.sidebar.button("🔙 Halaman Awal"):
     st.session_state.mulai_main = False
     st.session_state.mode_quiz = False
     st.rerun()

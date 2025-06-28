@@ -163,8 +163,8 @@ if st.session_state.mode_quiz:
                 ],
             }
         ))
-        fig.update_layout(height=250, width=400, margin=dict(t=30, b=10, l=10, r=10))
-        st.plotly_chart(fig)
+    # Tampilkan countdown animasi lingkaran
+    st.plotly_chart(fig, use_container_width=True)
 
         jawaban_disabled = sisa_waktu == 0
         jawaban = st.radio("Pilih jawaban:", soal["opsi"], key=f"soal{indeks}", disabled=jawaban_disabled)

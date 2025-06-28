@@ -1,2 +1,2 @@
 streamlit==1.35.0
-plotly.graph_objects
+plotly==5.22.0

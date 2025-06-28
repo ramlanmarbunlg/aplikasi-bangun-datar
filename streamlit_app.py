@@ -3,6 +3,7 @@ import math
 from PIL import Image
 import time
 import random
+import streamlit.components.v1 as components
 
 # Konfigurasi halaman
 st.set_page_config(page_title="🎲 Bangun Datar Anak", layout="centered")
@@ -57,9 +58,14 @@ if mode_anak:
     st.balloons()
     st.markdown(
         """
-        <audio autoplay>
-            <source src="audio/yay.mp3" type="audio/mpeg">
-        </audio>
+        components.html(
+    """
+    <audio autoplay>
+        <source src="audio/yay.mp3" type="audio/mp3">
+    </audio>
+    """,
+    height=0,
+)
         """,
         unsafe_allow_html=True
     )
@@ -102,9 +108,10 @@ def keliling_layang_layang(a, b): return 2 * (a + b)
 
 # Sidebar bangun
 st.sidebar.markdown("<h3 style='margin-bottom:10px;'>📐 Pilih Bangun Datar</h3>", unsafe_allow_html=True)
+bangun = st.sidebar.selectbox("🔷 Bangun Datar", list(gambar_dict.keys()))
 
 # Tab luas dan keliling
-tab1, tab2 = st.tabs(["📏 Luas", "📏 Keliling"])
+tab1, tab2 = st.tabs(["📏 Luas", "🔷 Keliling"])
 
 with tab1:
     st.subheader(f"Luas {bangun}")

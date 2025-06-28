@@ -123,19 +123,19 @@ with tab2:
         
 # Setelah menampilkan gambar
 img = Image.open(gambar_dict[bangun])
-img_resized = img.resize((500, 500))
+img_resized = img.resize((150, `50))
 st.image(img_resized, caption=f"Gambar {bangun}")
 
 # Link materi bacaan
 link_dict = {
-    "Persegi": "https://example.com/materi/persegi",
-    "Persegi Panjang": "https://example.com/materi/persegi-panjang",
-    "Segitiga": "https://example.com/materi/segitiga",
-    "Lingkaran": "https://example.com/materi/lingkaran",
-    "Jajar Genjang": "https://example.com/materi/jajar-genjang",
-    "Trapesium": "https://example.com/materi/trapesium",
-    "Belah Ketupat": "https://example.com/materi/belah-ketupat",
-    "Layang-Layang": "https://example.com/materi/layang-layang"
+    "Persegi": "https://id.wikipedia.org/wiki/Persegi",
+    "Persegi Panjang": "https://id.wikipedia.org/wiki/Persegi_panjang",
+    "Segitiga": "https://id.wikipedia.org/wiki/Segitiga",
+    "Lingkaran": "https://id.wikipedia.org/wiki/Lingkaran",
+    "Jajar Genjang": "https://id.wikipedia.org/wiki/Jajar_genjang",
+    "Trapesium": "https://id.wikipedia.org/wiki/Trapesium_(geometri)",
+    "Belah Ketupat": "https://id.wikipedia.org/wiki/Belah_ketupat",
+    "Layang-Layang": "https://id.wikipedia.org/wiki/Layang-layang_(geometri)"
 }
 
 st.markdown(f"📚 [Baca materi lengkap tentang {bangun}]({link_dict[bangun]})")

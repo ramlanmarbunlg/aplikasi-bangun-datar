@@ -123,7 +123,7 @@ with tab2:
         
 # Setelah menampilkan gambar
 img = Image.open(gambar_dict[bangun])
-img_resized = img.resize((150, `50))
+img_resized = img.resize((150, 150))
 st.image(img_resized, caption=f"Gambar {bangun}")
 
 # Link materi bacaan

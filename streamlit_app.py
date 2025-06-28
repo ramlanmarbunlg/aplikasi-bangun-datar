@@ -62,9 +62,9 @@ if not st.session_state.mulai_main:
     st.image("images/karakter1.png", width=150, caption="Ayo mulai petualanganmu!")
 
     if st.button("👉 Klik untuk Mulai Bermain 🎲", type="primary"):
-    st.session_state.loading_page = True
-    st.session_state.show_balloons = True  # nyalakan balon saat mulai
-    st.rerun()
+        st.session_state.loading_page = True
+        st.session_state.show_balloons = True  # nyalakan balon saat mulai
+        st.rerun()
 
     st.stop()
 

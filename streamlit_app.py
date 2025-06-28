@@ -165,9 +165,9 @@ if st.session_state.mode_quiz:
         unsafe_allow_html=True
     )
 
-    # Jawaban
-    jawaban_disabled = sisa_waktu == 0
-    jawaban = st.radio("Pilih jawaban:", soal["opsi"], key=f"soal{indeks}", disabled=jawaban_disabled)
+        # Jawaban
+        jawaban_disabled = sisa_waktu == 0
+        jawaban = st.radio("Pilih jawaban:", soal["opsi"], key=f"soal{indeks}", disabled=jawaban_disabled)
 
     # Aksi jika waktu habis
     if sisa_waktu == 0:

@@ -32,7 +32,7 @@ if not st.session_state.mulai_main:
     if st.button("👉 Klik untuk Mulai Bermain 🎲", type="primary"):
         with st.spinner("🎮 Memuat permainan seru..."):
             st.image("images/loading_emoji.gif", width=150, caption="🎉 Yuk kita mulai!")
-            time.sleep(2.5)
+            time.sleep(5)
         st.session_state.mulai_main = True
         st.session_state.mode_anak = True
         st.rerun()

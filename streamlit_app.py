@@ -3,7 +3,6 @@ import math
 from PIL import Image
 import time
 import random
-import streamlit.components.v1 as components
 
 # Konfigurasi halaman
 st.set_page_config(page_title="🎲 Bangun Datar Anak", layout="centered")
@@ -58,14 +57,9 @@ if mode_anak:
     st.balloons()
     st.markdown(
         """
-        components.html(
-    """
-    <audio autoplay>
-        <source src="audio/yay.mp3" type="audio/mp3">
-    </audio>
-    """,
-    height=0,
-)
+        <audio autoplay>
+            <source src="audio/yay.mp3" type="audio/mp3">
+        </audio>
         """,
         unsafe_allow_html=True
     )

@@ -179,7 +179,7 @@ if st.session_state.mode_quiz:
     st.stop()
 else:
 
-        soal_data = [s for s in all_soal if s["kategori"] == st.session_state.quiz_kategori]
+soal_data = [s for s in all_soal if s["kategori"] == st.session_state.quiz_kategori]
     # Evaluasi akhir quiz (soal sudah selesai)
     st.subheader("📊 Hasil Evaluasi")
     skor = 0

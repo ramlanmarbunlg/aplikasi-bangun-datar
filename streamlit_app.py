@@ -143,11 +143,11 @@ if st.session_state.mode_quiz:
     progress = min((indeks + 1) / total_soal, 1.0)
     st.progress(progress)
 
-# ✅ Jika masih ada soal yang harus dijawab
-if indeks < total_soal:
-    soal = soal_data[indeks]
-    st.header(f"🎓 Quiz: {soal['kategori']} - Soal {indeks + 1} dari {total_soal}")
-    st.subheader(soal["soal"])
+    # ✅ Jika masih ada soal yang harus dijawab
+    if indeks < total_soal:
+        soal = soal_data[indeks]
+        st.header(f"🎓 Quiz: {soal['kategori']} - Soal {indeks + 1} dari {total_soal}")
+        st.subheader(soal["soal"])
 
     # Timer
     if "start_time" not in st.session_state:

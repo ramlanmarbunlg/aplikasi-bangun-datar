@@ -135,54 +135,70 @@ if st.session_state.mode_quiz:
     indeks = st.session_state.quiz_index
 
     # Soal masih ada
-    if indeks < total_soal:
-        soal = soal_data[indeks]
-        st.header(f"🎓 Quiz: {soal['kategori']} - Soal {indeks + 1} dari {total_soal}")
+if indeks < total_soal:
+    soal = soal_data[indeks]
+    st.header(f"🎓 Quiz: {soal['kategori']} - Soal {indeks + 1} dari {total_soal}")
 
-        # Progress bar visual
-        progress = (indeks + 1) / total_soal
-        st.progress(progress)
-        st.subheader(soal["soal"])
+    # Progress bar visual soal
+    progress = (indeks + 1) / total_soal
+    st.progress(progress)
 
-        # Timer dan countdown
-        elapsed = int(time.time() - st.session_state.start_time)
-        sisa_waktu = max(0, 15 - elapsed)
+    st.subheader(soal["soal"])
 
-        # Tambahkan countdown visual dengan plotly
-        fig = go.Figure(go.Indicator(
-            mode="gauge+number",
-            value=sisa_waktu,
-            title={'text': "⏳ Sisa Waktu (Detik)"},
-            gauge={
-                'axis': {'range': [0, 15]},
-                'bar': {'color': "orange"},
-                'steps': [
-                    {'range': [0, 5], 'color': 'red'},
-                    {'range': [5, 10], 'color': 'yellow'},
-                    {'range': [10, 15], 'color': 'green'}
-                ],
-            }
-        ))
-        fig.update_layout(height=250, width=400, margin=dict(t=30, b=10, l=10, r=10))
-        st.plotly_chart(fig)
+    # Inisialisasi waktu awal jika belum
+    if "start_time" not in st.session_state:
+        st.session_state.start_time = time.time()
 
-        jawaban_disabled = sisa_waktu == 0
-        jawaban = st.radio("Pilih jawaban:", soal["opsi"], key=f"soal{indeks}", disabled=jawaban_disabled)
+    # Hitung waktu tersisa
+    elapsed = int(time.time() - st.session_state.start_time)
+    sisa_waktu = max(0, 15 - elapsed)
 
-        if sisa_waktu == 0:
-            st.warning("⏰ Waktu habis!")
-            st.session_state.quiz_jawaban[indeks] = jawaban
-            st.session_state.quiz_index += 1
-            st.session_state.start_time = time.time()
-            st.rerun()
+    # Warna dinamis countdown bar
+    if sisa_waktu > 10:
+        warna = "lightgreen"
+    elif sisa_waktu > 5:
+        warna = "orange"
+    else:
+        warna = "red"
 
-        if st.button("✅ Jawab dan Lanjut") and not jawaban_disabled:
-            st.session_state.quiz_jawaban[indeks] = jawaban
-            st.session_state.quiz_index += 1
-            st.session_state.start_time = time.time()
-            st.rerun()
+    # Countdown horizontal minimalis
+    countdown_placeholder = st.empty()
+    countdown_placeholder.markdown(
+        f"""
+        <div style="height: 18px; background-color: #eee; border-radius: 10px; overflow: hidden;">
+            <div style="width: {(sisa_waktu / 15) * 100}%; background-color: {warna}; height: 100%; 
+                        text-align: center; color: white; font-size: 14px; font-weight: bold;">
+                ⏳ {sisa_waktu} detik
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
-        st.stop()
+    # Jika waktu habis, otomatis lanjut
+    jawaban_disabled = sisa_waktu == 0
+    jawaban = st.radio("Pilih jawaban:", soal["opsi"], key=f"soal{indeks}", disabled=jawaban_disabled)
+
+    if sisa_waktu == 0:
+        st.warning("⏰ Waktu habis!")
+        # Simpan jawaban yang dipilih atau kosong jika tidak memilih
+        st.session_state.quiz_jawaban[indeks] = st.session_state.get(f"soal{indeks}", "(Lewat)")
+        st.session_state.quiz_index += 1
+        st.session_state.start_time = time.time()
+        st.rerun()
+
+    # Tombol untuk menjawab manual sebelum waktu habis
+    if st.button("✅ Jawab dan Lanjut") and not jawaban_disabled:
+        st.session_state.quiz_jawaban[indeks] = jawaban
+        st.session_state.quiz_index += 1
+        st.session_state.start_time = time.time()
+        st.rerun()
+
+    # Paksa update halaman tiap detik agar countdown hidup
+    time.sleep(1)
+    st.rerun()
+
+    st.stop()
 
     # Langkah 3: Evaluasi
     st.subheader("📊 Hasil Evaluasi")

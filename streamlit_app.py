@@ -137,13 +137,12 @@ if st.session_state.mode_quiz:
    # Soal masih ada
     if indeks < total_soal:
         soal = soal_data[indeks]
+        st.subheader(soal["soal"])
         st.header(f"🎓 Quiz: {soal['kategori']} - Soal {indeks + 1} dari {total_soal}")
 
     # Progress bar visual
     progress = (indeks + 1) / total_soal
     st.progress(min(progress, 1.0))
-
-    st.subheader(soal["soal"])
 
     # Hitung waktu tersisa
     elapsed = int(time.time() - st.session_state.start_time)

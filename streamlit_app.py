@@ -17,24 +17,32 @@ warna_ceria = [
 ]
 
 # Cek sesi awal
-if "mulai_main" not in st.session_state:
-    st.session_state.mulai_main = False
+for key, value in {
+    "mulai_main": False,
+    "loading": False,
+    "mode_anak": False,
+    "tema_anak": random.choice(warna_ceria)
+}.items():
+    if key not in st.session_state:
+        st.session_state[key] = value
 
-if "tema_anak" not in st.session_state:
-    st.session_state.tema_anak = random.choice(warna_ceria)
+# 💫 Halaman loading dengan GIF animasi
+if st.session_state.loading:
+    st.image("images/loading_emoji.gif", width=150, caption="🎉 Yuk kita mulai!")
+    time.sleep(2.5)
+    st.session_state.loading = False
+    st.session_state.mulai_main = True
+    st.session_state.mode_anak = True
+    st.rerun()
 
-# Halaman pembuka
+# 🎈 Halaman pembuka
 if not st.session_state.mulai_main:
     st.markdown("<h1 style='text-align: center; color: #FF69B4;'>🎉 Selamat Datang Anak Hebat!</h1>", unsafe_allow_html=True)
     st.markdown("<h3 style='text-align: center;'>Mari belajar bangun datar sambil bermain 🧠🎨</h3>", unsafe_allow_html=True)
     st.image("images/karakter1.png", width=150, caption="Ayo mulai petualanganmu!")
 
     if st.button("👉 Klik untuk Mulai Bermain 🎲", type="primary"):
-        with st.spinner("🎮 Memuat permainan seru..."):
-            st.image("images/loading_emoji.gif", width=300, caption="🎉 Yuk kita mulai!")
-            time.sleep(5)
-        st.session_state.mulai_main = True
-        st.session_state.mode_anak = True
+        st.session_state.loading = True
         st.rerun()
 
     st.stop()

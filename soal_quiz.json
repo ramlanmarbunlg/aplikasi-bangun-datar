@@ -2,14 +2,14 @@
   {
     "kategori": "Persegi",
     "soal": "Berapakah luas persegi dengan sisi 3 cm?",
-    "opsi": ["5 cm²", "9 cm²", "13 cm²", "9 cm²"],
+    "opsi": ["5 cm²", "9 cm²", "13 cm²", "25 cm²"],
     "jawaban": "9 cm²",
     "pembahasan": "Luas persegi = sisi × sisi = 3 × 3 = 9 cm²."
   },
   {
     "kategori": "Persegi",
     "soal": "Berapakah luas persegi dengan sisi 4 cm?",
-    "opsi": ["12 cm²", "16 cm²", "20 cm²", "16 cm²"],
+    "opsi": ["12 cm²", "16 cm²", "20 cm²", "19 cm²"],
     "jawaban": "16 cm²",
     "pembahasan": "Luas persegi = sisi × sisi = 4 × 4 = 16 cm²."
   },

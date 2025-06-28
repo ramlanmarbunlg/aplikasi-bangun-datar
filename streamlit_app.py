@@ -32,7 +32,7 @@ if mode_anak:
     st.markdown(
         """
         <audio autoplay>
-            <source src="audio/yay.mp3" type="audio/mpeg">
+            <source src="audio/yay.mp3" type="audio/mp3">
         </audio>
         """,
         unsafe_allow_html=True
@@ -74,7 +74,7 @@ bangun = st.sidebar.selectbox("🔷 Bangun Datar", list(gambar_dict.keys()))
 
 # Gambar dan link materi
 img = Image.open(gambar_dict[bangun])
-img_resized = img.resize((500, 500))
+img_resized = img.resize((150, 150))
 st.image(img_resized, caption=f"Gambar {bangun}")
 
 # Link materi (contoh)

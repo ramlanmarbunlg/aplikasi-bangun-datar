@@ -139,10 +139,10 @@ if st.session_state.mode_quiz:
         soal = soal_data[indeks]
         st.header(f"🎓 Quiz: {soal['kategori']} - Soal {indeks + 1} dari {total_soal}")
 
-        # Progress bar visual
-        progress = (indeks + 1) / total_soal
-        st.progress(progress)
-        st.subheader(soal["soal"])
+    # Progress bar visual
+    progress = (indeks + 1) / total_soal
+    st.progress(progress)
+    st.subheader(soal["soal"])
 
     # Timer dan countdown
     if "start_time" not in st.session_state:
@@ -165,9 +165,9 @@ if st.session_state.mode_quiz:
         unsafe_allow_html=True
     )
 
-        # Jawaban
-        jawaban_disabled = sisa_waktu == 0
-        jawaban = st.radio("Pilih jawaban:", soal["opsi"], key=f"soal{indeks}", disabled=jawaban_disabled)
+    # Jawaban
+    jawaban_disabled = sisa_waktu == 0
+    jawaban = st.radio("Pilih jawaban:", soal["opsi"], key=f"soal{indeks}", disabled=jawaban_disabled)
 
     # Aksi jika waktu habis
     if sisa_waktu == 0:
